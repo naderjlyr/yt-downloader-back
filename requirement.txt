@@ -1,0 +1,13 @@
+1- install a virtual environment (optional):
+    1.1 if you're using Ubuntu-based distributions, then go with the following commands:
+    1.1.1 apt-get install python3-venv
+    1.1.2 python3 -m venv venv
+
+2. inside the project run:
+    2.1 pip install youtube_dl
+    2.2 pip install django
+
+3. in command line (Terminal or CMD) inside the project activate venv (if installed) run:
+    3.1 python manage.py runserver
+
+4. navigate to browser -> http://127.0.0.1:8000/get_link and submit a complete youtube url
