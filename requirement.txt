@@ -6,6 +6,7 @@
 2. inside the project run:
     2.1 pip install youtube_dl
     2.2 pip install django
+    2.2 pip install djangorestframework
 
 3. in command line (Terminal or CMD) inside the project activate venv (if installed) run:
     3.1 python manage.py runserver
