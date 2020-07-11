@@ -19,34 +19,28 @@ class DownloadVideo(APIView):
         try:
             data = request.data
             video_link = data['video_link']
-            ydl = youtube_dl.YoutubeDL({'format': 'bestaudio/best',
-                                        'postprocessors': [{
-                                            'key': 'FFmpegExtractAudio',
-                                            'preferredcodec': 'mp3',
-                                            'preferredquality': '192',
-                                        }]})
+            if video_link.startswith("www.youtube.com"):
+                video_link = "https://" + video_link
+            elif video_link.startswith("youtube.com"):
+                video_link = "https://www." + video_link
+
+            format_id = None
+            if "format" in data.keys():
+                format_id = data['format']
+            ydl = youtube_dl.YoutubeDL({})
 
             with ydl:
-                result = ydl.extract_info(
-                    video_link,
-                    download=False
-                )
-
-            if 'entries' in result:
-                video = result['entries'][0]
+                result = ydl.extract_info(video_link, download=False)
+            video_information = {}
+            if video_link.__contains__("&list="):
+                self.get_playlist(video_information, result)
             else:
-                video = result
+                video_information = self.single_url(format_id, video_link)
 
-            video_urls = video['formats']
-            output = {}
-            formatted_file = []
-            for video_url in video_urls:
-                output['url'] = video_url['url']
-                output['extension'] = video_url['ext']
-                output['size'] = video_url['filesize']
-                output['format'] = video_url['format'].split(' - ')[1]
-                formatted_file.append(output)
-            response = {"status": "success", "code": status.HTTP_200_OK, "data": formatted_file, "message": []}
+
+            response = {"status": "success", "code": status.HTTP_200_OK, "data": video_information, "message": []}
+            if len(video_information) == 0:
+                response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"}, "message": []}
 
             return Response(response, status=status.HTTP_200_OK)
         except BaseException as ex:
@@ -62,6 +56,46 @@ class DownloadVideo(APIView):
             f.write("\n Stack trace : %s" % stack_trace)
             f.write("\n URL : %s" % video_link)
             f.close()
+            response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"}, "message": []}
+
+            return Response(response, status=status.HTTP_204_NO_CONTENT)
+
+    def get_playlist(self, playlist_links, result):
+        for slug in result['entries']:
+            single_format_ids = slug['formats']
+            playlist_links['playlist'] = True
+            playlist_links['formats'] = {}
+            for single_format in single_format_ids:
+                required_info = {'url': single_format['url'], 'extension': single_format['ext'],
+                                 'size': single_format['filesize'],
+                                 'format_id': single_format['format_id'],
+                                 'format': single_format['format'].split(' - ')[1]}
+                if single_format['format_id'] in playlist_links.keys():
+                    playlist_links['formats'][single_format['format_id']].append(required_info)
+                else:
+                    playlist_links['formats'][single_format['format_id']] = [required_info]
+
+    def single_url(self, format_id, video_link):
+        ydl = youtube_dl.YoutubeDL({})
+
+        with ydl:
+            result = ydl.extract_info(video_link, download=False)
+        if 'entries' in result:
+            video = result['entries'][0]
+        else:
+            video = result
+
+        video_urls = video['formats']
+        formatted_file = {"playlist": False, 'formats': {'0': []}}
+        for video_url in video_urls:
+            output = {'url': video_url['url'], 'extension': video_url['ext'], 'size': video_url['filesize'],
+                      'format_id': video_url['format_id'], 'format': video_url['format'].split(' - ')[1]}
+            if format_id is not None:
+                if str(video_url['format_id']) == str(format_id):
+                    formatted_file['formats']['0'].append(output)
+            else:
+                formatted_file['formats']['0'].append(output)
+        return formatted_file
 
     def get(self, request):
         test_count = 0
