@@ -33,7 +33,7 @@ class DownloadVideo(APIView):
                 result = ydl.extract_info(video_link, download=False)
             video_information = {}
             if video_link.__contains__("&list="):
-                self.get_playlist(video_information, result)
+                self.get_playlist(video_information, result, format_id)
             else:
                 video_information = self.single_url(format_id, video_link)
 
@@ -60,17 +60,21 @@ class DownloadVideo(APIView):
 
             return Response(response, status=status.HTTP_204_NO_CONTENT)
 
-    def get_playlist(self, playlist_links, result):
+    def get_playlist(self, playlist_links, result, format_id):
+        playlist_links['playlist'] = True
+        playlist_links['formats'] = {}
         for slug in result['entries']:
             single_format_ids = slug['formats']
-            playlist_links['playlist'] = True
-            playlist_links['formats'] = {}
             for single_format in single_format_ids:
+                if format_id is not None:
+                    if str(single_format['format_id']) != str(format_id):
+                        continue
+
                 required_info = {'url': single_format['url'], 'extension': single_format['ext'],
                                  'size': single_format['filesize'],
                                  'format_id': single_format['format_id'],
                                  'format': single_format['format'].split(' - ')[1]}
-                if single_format['format_id'] in playlist_links.keys():
+                if single_format['format_id'] in playlist_links['formats'].keys():
                     playlist_links['formats'][single_format['format_id']].append(required_info)
                 else:
                     playlist_links['formats'][single_format['format_id']] = [required_info]
