@@ -469,6 +469,12 @@ border: 1px solid rgba(34,36,38,.15);
   margin: 40px auto;
 }
 
+.button:active, .button:hover {
+  background-color: #Ac76d0 !important;
+}
+.button {
+  border: unset;
+}
 .button-primary {
  background-color: #0e76d0 !important;
 font-size: 15px; 
