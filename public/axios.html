@@ -149,8 +149,84 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   
 <script>
-var data = JSON.stringify({"video_link":"https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format":249});
 
+$('input#search-btn').on('click', function(e) {
+		e.preventDefault();
+    
+    var convert_link = $('#domain-text').val();
+    
+    if(convert_link) {
+      getConvertData(convert_link);
+    }else
+      $('.ui.negative.message p').html('No Link provided!');
+});
+
+function getConvertData(link) {
+  var api_url = "http://104.251.218.154:8081/downloader/download_links";
+  //var data = JSON.stringify({"video_link":"https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format":249});
+
+
+  //var data = {"video_link": "https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format": 249};
+
+  $.ajax({
+    url: api_url, 
+    type: "post",
+    dataType: "json", 
+    data: JSON.stringify({
+      "video_link": link , 
+      //"format":249
+      }
+    ),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    crossDomain: true,
+    /*beforeSend: function (xhr) {
+      xhr.setRequestHeader('Content-Type', 'application/json');
+    },*/
+    success: function(result){
+      console.log(result);
+      
+      if (result['data']['formats'][0]) {
+        /*var sum = 0;
+        var obj = {prop1: 5, prop2: 13, prop3: 8};
+
+
+        for each (var item in obj) {
+          sum += item;
+        }
+        */
+
+        var resultTotal = result['data']['formats'][0].length;
+        var resultObj = result['data']['formats'][0];
+        
+        /*var i;
+        for (i = 0; i < resultTotal; i++) {
+          console.log('resultObj['+i+']' + resultObj[i]['format'])
+        }
+        */
+
+        resultObj.forEach(function(item) {
+            console.log('item', item);
+            console.log('format: ' + item['format']);
+            console.log('format_id: ' + item['format_id']);
+            console.log('url: ' + item['url']);
+            console.log('extension: ' + item['extension']);
+          });
+          
+      }
+    },
+    error: function(result){
+      console.log('error: ');
+      console.log(result);
+    }
+  });
+
+}  
+
+
+
+/*
 var config = {
   method: 'post',
   url: 'http://104.251.218.154:8081/downloader/download_links',
@@ -163,12 +239,24 @@ var config = {
 axios(config)
 .then(function (response) {
   console.log('Then: ');
+  console.log('JSON.stringify: ');
   console.log(JSON.stringify(response.data));
+  
+  console.log('response.data: ');
+  console.log(response.data);
+  
+  for(var k in result) {
+   console.log(k, result[k]);
+  }
+
+  
 })
 .catch(function (error) {
   console.log('Error: ');
   console.log(error);
 });
+
+*/
 </script>
 </body>
 </html>
