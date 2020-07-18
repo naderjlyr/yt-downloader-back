@@ -152,13 +152,6 @@
 var data = JSON.stringify({"video_link":"https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format":249});
 
 var config = {
-  headers: {
-	  'Access-Control-Allow-Origin': '*',
-	},
-  proxy: {
-	  host: '104.251.218.154',
-	  port: 8081
-	},
   method: 'post',
   url: 'http://104.251.218.154:8081/downloader/download_links',
   headers: { 
@@ -169,9 +162,11 @@ var config = {
 
 axios(config)
 .then(function (response) {
+  console.log('Then: ');
   console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
+  console.log('Error: ');
   console.log(error);
 });
 </script>
