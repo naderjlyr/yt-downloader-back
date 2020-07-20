@@ -37,10 +37,10 @@ class DownloadVideo(APIView):
             else:
                 video_information = self.single_url(format_id, video_link)
 
-
             response = {"status": "success", "code": status.HTTP_200_OK, "data": video_information, "message": []}
             if len(video_information) == 0:
-                response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"}, "message": []}
+                response = {"status": "error", "code": status.HTTP_204_NO_CONTENT,
+                            "data": {"message": "no content found"}, "message": []}
 
             return Response(response, status=status.HTTP_200_OK)
         except BaseException as ex:
@@ -56,7 +56,8 @@ class DownloadVideo(APIView):
             f.write("\n Stack trace : %s" % stack_trace)
             f.write("\n URL : %s" % video_link)
             f.close()
-            response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"}, "message": []}
+            response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"},
+                        "message": []}
 
             return Response(response, status=status.HTTP_204_NO_CONTENT)
 
@@ -69,11 +70,14 @@ class DownloadVideo(APIView):
                 if format_id is not None:
                     if str(single_format['format_id']) != str(format_id):
                         continue
+                required_info = {
+                    'url': single_format['url'], 'title': slug['title'],
+                    'image': slug['thumbnails'][0]['url'],
 
-                required_info = {'url': single_format['url'], 'extension': single_format['ext'],
-                                 'size': single_format['filesize'],
-                                 'format_id': single_format['format_id'],
-                                 'format': single_format['format'].split(' - ')[1]}
+                     'extension': single_format['ext'],
+                    'size': single_format['filesize'],
+                    'format_id': single_format['format_id'],
+                    'format': single_format['format'].split(' - ')[1]}
                 if single_format['format_id'] in playlist_links['formats'].keys():
                     playlist_links['formats'][single_format['format_id']].append(required_info)
                 else:
@@ -91,8 +95,11 @@ class DownloadVideo(APIView):
 
         video_urls = video['formats']
         formatted_file = {"playlist": False, 'formats': {'0': []}}
+
         for video_url in video_urls:
-            output = {'url': video_url['url'], 'extension': video_url['ext'], 'size': video_url['filesize'],
+            output = {'title': result['title'], 'image': result['thumbnails'][0]['url'], 'url': video_url['url'],
+                      'extension': video_url['ext'],
+                      'size': video_url['filesize'],
                       'format_id': video_url['format_id'], 'format': video_url['format'].split(' - ')[1]}
             if format_id is not None:
                 if str(video_url['format_id']) == str(format_id):
