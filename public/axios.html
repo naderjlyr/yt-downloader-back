@@ -77,6 +77,7 @@
       
       <div class="segment">
         
+        <div class="search">
          <div class="domain-search-begin">
             <div class="form_text">Please insert a valid video URL</div>
               <form class="domain-search">
@@ -85,16 +86,27 @@
                   <input id="search-btn" type="submit" value="Convert" class="button button-primary">
               </form>
           </div>
-                
+        </div>
+        
         <div class="domain-search-finished">
           Process finished!<br>
+          <hr>
+          <div class="domain-search-result">
+          </div>
+  
+          <hr>
+          <img url="" alt="Title_Image">
+          Title: <span class="title"></span>
+          
           <a class="button button-primary" href="#" >Download</a>
         </div>
-        <div id="formats">
+        
+        
+       <div id="formats">
           <a id="mp3" href="" style="background-color: rgb(0, 135, 207);">mp3</a>
           <a id="mp4" href="" style="background-color: rgb(0, 124, 190);">mp4</a>  
         </div>
-       
+        
       </div>
       
       <div class="ui negative message">
@@ -185,7 +197,7 @@ function getConvertData(link) {
       xhr.setRequestHeader('Content-Type', 'application/json');
     },*/
     success: function(result){
-      console.log(result);
+      console.log('result: ', result);
       
       if (result['data']['formats'][0]) {
         /*var sum = 0;
@@ -206,12 +218,24 @@ function getConvertData(link) {
         }
         */
 
+        var resultBox = $('.domain-search-result');
         resultObj.forEach(function(item) {
             console.log('item', item);
             console.log('format: ' + item['format']);
             console.log('format_id: ' + item['format_id']);
             console.log('url: ' + item['url']);
             console.log('extension: ' + item['extension']);
+            
+            //resultBox.innerHTML('')
+            resultBox.append("<b>"+item['title']+"</b><br>");
+            resultBox.append("<img src='"+item['image']+"' alt='"+item['title']+"'><br>");
+            resultBox.append(", <em>"+item['format']+"</em>");
+            resultBox.append(", <em>"+item['format_id']+"</em><br>");
+            resultBox.append(", <b>"+Math.round(item['size']/1024/1024, 2)+"MB</b>");
+            resultBox.append(", <em>."+(item['extension'])+"</em>");
+            resultBox.append("<br> <a href='"+item['url']+"' target='_blank'>Download<a>");
+            resultBox.append("<hr>");
+            
           });
           
       }
