@@ -1,65 +1,133 @@
+from __future__ import unicode_literals
 import json
 import sys
 import traceback
+from datetime import datetime, time
+from time import time
 
 import youtube_dl
 from http.client import HTTPResponse
 
 from django.shortcuts import render
 from rest_framework import status
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+import os
+from django.conf import settings
+from django.http import HttpResponse, Http404, FileResponse
+
+
+def download(request, path):
+    path = 'requirement.txt'
 
 
 class DownloadVideo(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        try:
-            data = request.data
-            video_link = data['video_link']
-            if video_link.startswith("www.youtube.com"):
-                video_link = "https://" + video_link
-            elif video_link.startswith("youtube.com"):
-                video_link = "https://www." + video_link
+        data = request.data
+        video_link = data['video_link']
+        if video_link.startswith("www.youtube.com"):
+            video_link = "https://" + video_link
+        elif video_link.startswith("youtube.com"):
+            video_link = "https://www." + video_link
 
-            format_id = None
-            if "format" in data.keys():
-                format_id = data['format']
-            ydl = youtube_dl.YoutubeDL({})
-
-            with ydl:
-                result = ydl.extract_info(video_link, download=False)
-            video_information = {}
-            if video_link.__contains__("&list="):
-                self.get_playlist(video_information, result, format_id)
-            else:
-                video_information = self.single_url(format_id, video_link)
-
-            response = {"status": "success", "code": status.HTTP_200_OK, "data": video_information, "message": []}
-            if len(video_information) == 0:
-                response = {"status": "error", "code": status.HTTP_204_NO_CONTENT,
-                            "data": {"message": "no content found"}, "message": []}
+        format_id = None
+        if "format" in data.keys():
+            format_id = data['format']
+        if format_id == 'mp3':
+            file_path = self.get_mp3(video_link)
+            response = {"status": "success", "code": status.HTTP_200_OK,
+                        "data": {"formats": {"mp3": [{"format": "audio", "extension": "mp3", "url": str(file_path[0]),
+                                                      "title": str(file_path[1])}]}}, "message": []}
 
             return Response(response, status=status.HTTP_200_OK)
-        except BaseException as ex:
-            ex_type, ex_value, ex_traceback = sys.exc_info()
-            trace_back = traceback.extract_tb(ex_traceback)
-            stack_trace = list()
-            for trace in trace_back:
-                stack_trace.append(
-                    "File : %s , Line : %d, Func.Name : %s, Message : %s" % (trace[0], trace[1], trace[2], trace[3]))
-            f = open("crawler_log.txt", 'a', encoding="utf-8")
-            f.write("\n Exception type : %s " % ex_type.__name__)
-            f.write("\n Exception message : %s" % ex_value)
-            f.write("\n Stack trace : %s" % stack_trace)
-            f.write("\n URL : %s" % video_link)
-            f.close()
-            response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"},
-                        "message": []}
+        ydl = youtube_dl.YoutubeDL({})
 
-            return Response(response, status=status.HTTP_204_NO_CONTENT)
+        with ydl:
+            result = ydl.extract_info(video_link, download=False)
+        video_information = {}
+        if video_link.__contains__("&list="):
+            self.get_playlist(video_information, result, format_id)
+        else:
+            video_information = self.single_url(format_id, video_link)
+
+        response = {"status": "success", "code": status.HTTP_200_OK, "data": video_information, "message": []}
+        if len(video_information) == 0:
+            response = {"status": "error", "code": status.HTTP_204_NO_CONTENT,
+                        "data": {"message": "no content found"}, "message": []}
+
+        return Response(response, status=status.HTTP_200_OK)
+        # except BaseException as ex:
+        #     ex_type, ex_value, ex_traceback = sys.exc_info()
+        #     trace_back = traceback.extract_tb(ex_traceback)
+        #     stack_trace = list()
+        #     for trace in trace_back:
+        #         stack_trace.append(
+        #             "File : %s , Line : %d, Func.Name : %s, Message : %s" % (trace[0], trace[1], trace[2], trace[3]))
+        #     f = open("crawler_log.txt", 'a', encoding="utf-8")
+        #     f.write("\n Exception type : %s " % ex_type.__name__)
+        #     f.write("\n Exception message : %s" % ex_value)
+        #     f.write("\n Stack trace : %s" % stack_trace)
+        #     f.write("\n URL : %s" % video_link)
+        #     f.close()
+        #     response = {"status": "error", "code": status.HTTP_204_NO_CONTENT, "data": {"message": "no content found"},
+        #                 "message": []}
+        #
+        #     return Response(response, status=status.HTTP_204_NO_CONTENT)
+
+    def get_mp3(self, video_link):
+        class MyLogger(object):
+            def debug(self, msg):
+                pass
+
+            def warning(self, msg):
+                pass
+
+            def error(self, msg):
+                print(msg)
+
+        def my_hook(d):
+
+            if d['status'] == 'finished':
+                global path
+                path = d['filename']
+                return d
+                # print(d)
+                # print('Done downloading, now converting ...')
+
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+            'logger': MyLogger(),
+            'progress_hooks': [my_hook],
+        }
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([video_link])
+        from django.conf import settings
+        from shutil import copyfile
+        base_dir = settings.BASE_DIR
+        # media_dir = os.path.join(base_dir, 'media')
+        media_dir = settings.MEDIA_ROOT
+        settings_dir = os.path.dirname(__file__)
+        PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+        old_file_path = os.path.join(PROJECT_ROOT, ''.join(path.split('.')[:-1]) + '.mp3')
+        # old_file_path = os.path.join(media_dir, '')
+        dir_name = 'downloaded_files'
+        if not os.path.exists(os.path.join(media_dir, dir_name)):
+            os.makedirs(os.path.join(media_dir, dir_name))
+        now = datetime.now().timestamp()
+        new_file_name = 'downloaded_files/' + str(now) + '.mp3'
+        new_file_path = os.path.join(media_dir, new_file_name)
+        copyfile(old_file_path, new_file_path)
+        os.remove(old_file_path)
+        return ["/media/" + str(new_file_name), path]
 
     def get_playlist(self, playlist_links, result, format_id):
         playlist_links['playlist'] = True
@@ -74,7 +142,7 @@ class DownloadVideo(APIView):
                     'url': single_format['url'], 'title': slug['title'],
                     'image': slug['thumbnails'][0]['url'],
 
-                     'extension': single_format['ext'],
+                    'extension': single_format['ext'],
                     'size': single_format['filesize'],
                     'format_id': single_format['format_id'],
                     'format': single_format['format'].split(' - ')[1]}
@@ -84,7 +152,17 @@ class DownloadVideo(APIView):
                     playlist_links['formats'][single_format['format_id']] = [required_info]
 
     def single_url(self, format_id, video_link):
-        ydl = youtube_dl.YoutubeDL({})
+        downloader_params = {
+            "format": "bestaudio",
+        }
+        downloader_params["postprocessors"] = [
+            {
+                "key": "FFmpegExtractAudio",
+                "preferredcodec": "mp3",
+                "preferredquality": "192",
+            }]
+        ydl = youtube_dl.YoutubeDL({'audioformat': "mp3",
+                                    })
 
         with ydl:
             result = ydl.extract_info(video_link, download=False)
