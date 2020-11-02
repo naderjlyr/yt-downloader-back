@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Youtube to Mp3 downloader</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/css.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+    <!-- Scripts
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="js/axios/axios.js"></script>
+  <script src="js/jquery3.3.1.min.js"></script>
+  <script src="js/custom.js"></script>
+  
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <section class="header">
+    
+      <nav class="navbar">
+      <div class="container">
+        <ul class="navbar-list">
+          <li class="navbar-item"><a class="navbar-link" href="#intro">Start</a></li>
+          <li class="navbar-item"><a class="navbar-link" href="#examples">FAQ</a></li>
+          <li class="navbar-item">
+            <a class="navbar-link" href="#" data-popover="#codeNavPopover">About us</a>
+            <div id="codeNavPopover" class="popover">
+              <ul class="popover-list">
+                <li class="popover-item">
+                  <a class="popover-link" href="#grid">Copyright Claims</a>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="#privacy-policy">Privacy Policy</a>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="#terms-of-ise">Terms of Use</a>
+                </li>
+                <li class="popover-item">
+                  <a class="popover-link" href="#contact-us">Contact Us</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+          
+        </ul>
+      </div>
+    </nav>
+    
+    
+      <h3 class="title">Youtube to Mp3</h3>
+      
+      <div class="segment">
+        
+        <div class="search">
+         <div class="domain-search-begin">
+            <div class="form_text">Please insert a valid video URL</div>
+              <form class="domain-search">
+                  <input id="domain-text" type="text" placeholder="Youtube video URL" class="">
+                
+                  <input id="search-btn" type="submit" value="Convert" class="button button-primary">
+              </form>
+          </div>
+        </div>
+        
+        <div class="domain-search-finished">
+          Process finished!<br>
+          <hr>
+          <div class="domain-search-result">
+          </div>
+  
+          <hr>
+          <img url="" alt="Title_Image">
+          Title: <span class="title"></span>
+          
+          <a class="button button-primary" href="#" >Download</a>
+        </div>
+        
+        
+       <div id="formats">
+          <a id="mp3" href="" style="background-color: rgb(0, 135, 207);">mp3</a>
+          <a id="mp4" href="" style="background-color: rgb(0, 124, 190);">mp4</a>  
+        </div>
+        
+      </div>
+      
+      <div class="ui negative message">
+        <i class="close icon"></i>
+        <div class="header">
+          An error occurred (code: 0-0).
+        </div>
+        <p>Please try to convert another video by clicking <a href="index.html">here</a>.</p>
+      </div>
+      
+      <div class="ui success message">
+        <i class="close icon"></i>
+        <div class="header">
+          Great!
+        </div>
+        <p>Well done dude!.</p>
+      </div>
+
+       
+
+    </section>
+    
+    <div class="row separator">
+    </div>
+    <div class="row">
+      <div class="column">
+        <h3>Youtube to Mp3 downloader</h3>
+        <div id="text">
+   <p>
+    By using our converter you can easily convert YouTube videos to mp3 (audio) or mp4 (video) files and download them for free - this service works for computers, tablets and mobile devices.
+   </p>
+   <p>
+    The videos are always converted in the highest available quality. Please note that we can only convert videos up to a length of 1 hour - the limitation is necessary, so the conversion of any video will not take 
+    more than a couple of minutes.
+   </p>
+   <p>
+    Our service is for free and does not require any software or registration. By using our service you are accepting our <a href="terms-of-use">Terms of Use</a>.
+   </p>
+   <p>
+    To convert a video, copy the YouTube video URL into our converter, choose a format and click the convert button. As soon as the conversion is finished you can download the file by clicking on the download button.
+   </p>
+   <p>
+    Enjoy! We hope you like our service.
+   </p>
+  </div>
+  
+      </div>
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+<script>
+
+$('input#search-btn').on('click', function(e) {
+		e.preventDefault();
+    
+    var convert_link = $('#domain-text').val();
+    
+    if(convert_link) {
+      getConvertData(convert_link);
+    }else
+      $('.ui.negative.message p').html('No Link provided!');
+});
+
+function getConvertData(link) {
+  var api_url = "http://104.251.218.154:8081/downloader/download_links";
+  //var data = JSON.stringify({"video_link":"https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format":249});
+
+
+  //var data = {"video_link": "https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd","format": 249};
+
+  $.ajax({
+    url: api_url, 
+    type: "post",
+    dataType: "json", 
+    data: JSON.stringify({
+      "video_link": link , 
+      //"format":249
+      }
+    ),
+    headers: {
+      'Content-Type': 'application/json'
+      //"Content-Type": "application/octet-stream"
+    },
+    //responseType: "blob",
+    crossDomain: true,
+    /*beforeSend: function (xhr) {
+      xhr.setRequestHeader('Content-Type', 'application/json');
+    },*/
+    success: function(result){
+      console.log('result: ', result);
+      
+      if (result['data']['formats'][0]) {
+        /*var sum = 0;
+        var obj = {prop1: 5, prop2: 13, prop3: 8};
+
+
+        for each (var item in obj) {
+          sum += item;
+        }
+        */
+
+        var resultTotal = result['data']['formats'][0].length;
+        var resultObj = result['data']['formats'][0];
+        
+        /*var i;
+        for (i = 0; i < resultTotal; i++) {
+          console.log('resultObj['+i+']' + resultObj[i]['format'])
+        }
+        */
+        var i=1;
+        var resultBox = $('.domain-search-result');
+        resultObj.forEach(function(item) {
+            i++;
+            
+            console.log('item', item);
+            console.log('format: ' + item['format']);
+            console.log('format_id: ' + item['format_id']);
+            console.log('url: ' + item['url']);
+            console.log('extension: ' + item['extension']);
+            
+            //resultBox.innerHTML('')
+            resultBox.append("<b>"+item['title']+"</b><br>");
+            resultBox.append("<img src='"+item['image']+"' alt='"+item['title']+"'><br>");
+            resultBox.append(", <em>"+item['format']+"</em>");
+            resultBox.append(", <em>"+item['format_id']+"</em><br>");
+            resultBox.append(", <b>"+Math.round(item['size']/1024/1024, 2)+"MB</b>");
+            resultBox.append(", <em>."+(item['extension'])+"</em>");
+            //resultBox.append("<br> <a href='"+item['url']+"' download='"+item['title']+"."+item['extension']+"'>Download<a>");
+            
+            
+            resultBox.append("<hr>");
+            
+            var fileName = item['title']+'.'+item['extension'];
+            var downloadUrl = item['url'];
+
+            //resultBox.append("<br> <a href='"+item['url']+"' onClick='"+fileName+"' >Download<a>");
+            resultBox.append("<br> <a href='"+item['url']+"' download='"+fileName+"' >Download<a>");
+            //resultBox.append("<br> <a href='#' onClick='javascript:"+downloadAs(downloadUrl, fileName)+"'>Download2<a>");
+            
+            resultBox.append('<a class="btn  btn-primary" href="'+item['url']+'" download="youtube.mp3"> Download3</a>');
+            
+            
+            //downloadFile(downloadUrl)
+            
+
+          });
+          
+      }
+    },
+    error: function(result){
+      console.log('error: ');
+      console.log(result);
+    }
+  });
+
+function downloadAs(url, filename){
+// XMLHttpRequest
+/*
+var xhr = new XMLHttpRequest();
+xhr.open('POST', url, true);
+xhr.responseType = 'arraybuffer';
+xhr.onload = function () {
+    if (this.status === 200) {
+        //var filename = "";
+        var disposition = xhr.getResponseHeader('Content-Disposition');
+        if (disposition && disposition.indexOf('attachment') !== -1) {
+            var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            var matches = filenameRegex.exec(disposition);
+            if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+        }
+        var type = xhr.getResponseHeader('Content-Type');
+
+        var blob = new Blob([this.response], { type: type });
+        if (typeof window.navigator.msSaveBlob !== 'undefined') {
+            // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+            window.navigator.msSaveBlob(blob, filename);
+        } else {
+            var URL = window.URL || window.webkitURL;
+            var downloadUrl = URL.createObjectURL(blob);
+
+            if (filename) {
+                // use HTML5 a[download] attribute to specify filename
+                var a = document.createElement("a");
+                // safari doesn't support this yet
+                if (typeof a.download === 'undefined') {
+                    window.location = downloadUrl;
+                } else {
+                    a.href = downloadUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                }
+            } else {
+                window.location = downloadUrl;
+            }
+
+            setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+        }
+    }
+};
+xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+var params=JSON.stringify({"hej": 'hej'});
+xhr.send($.param(params));
+*/
+
+
+// jQuery ajax
+$.ajax({
+    type: "GET",
+    url: url,
+     headers: {
+      "Content-Disposition": "attachment; filename='apa.mp4'",
+      "Content-Type": "application/download"
+    },
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Content-Type', 'application/download');
+      xhr.setRequestHeader('Content-Disposition', "attachment; filename='apa.mp4'");
+    },
+    success: function(response, status, xhr) {
+        // check for a filename
+        var filename = "";
+        console.log('xhr', xhr);
+        var disposition = xhr.getResponseHeader('Content-Disposition');
+        if (disposition && disposition.indexOf('attachment') !== -1) {
+            var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+            var matches = filenameRegex.exec(disposition);
+            if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+        }
+
+        var type = xhr.getResponseHeader('Content-Type');
+        var blob = new Blob([response], { type: type });
+
+        if (typeof window.navigator.msSaveBlob !== 'undefined') {
+            // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+            window.navigator.msSaveBlob(blob, filename);
+        } else {
+            var URL = window.URL || window.webkitURL;
+            var downloadUrl = URL.createObjectURL(blob);
+
+            if (filename) {
+                // use HTML5 a[download] attribute to specify filename
+                var a = document.createElement("a");
+                // safari doesn't support this yet
+                if (typeof a.download === 'undefined') {
+                    window.location = downloadUrl;
+                } else {
+                    a.href = downloadUrl;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    //a.click();
+                }
+            } else {
+                //window.location = downloadUrl;
+            }
+
+            setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+        }
+    }
+});
+}
+
+/*
+//https://stackoverflow.com/questions/7428831/javascript-rename-file-on-download/15970037#15970037
+const downloadAs = (url, name) => {
+              axios.get(url, {
+                headers: {
+                  "Content-Type": "application/octet-stream"
+                },
+                responseType: "blob"
+              })
+                .then(response => {
+                  const a = document.createElement("a");
+                  const url = window.URL.createObjectURL(response.data);
+                  a.href = url;
+                  a.download = name;
+                  a.click();
+                  a.class = 'apa';
+                })
+                .catch(err => {
+                  console.log("error", err);
+                });
+            };
+*/
+            
+            //downloadAs(downloadUrl, fileName);
+
+
+
+
+setTimeout(function() {
+  
+   url = '//assets.codepen.io/images/codepen-logo.svg';
+    downloadFile(url); // UNCOMMENT THIS LINE TO MAKE IT WORK
+  
+}, 2000);
+
+// Source: http://pixelscommander.com/en/javascript/javascript-file-download-ignore-content-type/
+window.downloadFile = function (sUrl) {
+
+    //iOS devices do not support downloading. We have to inform user about this.
+    if (/(iP)/g.test(navigator.userAgent)) {
+       //alert('Your device does not support files downloading. Please try again in desktop browser.');
+       window.open(sUrl, '_blank');
+       return false;
+    }
+
+    //If in Chrome or Safari - download via virtual link click
+    if (window.downloadFile.isChrome || window.downloadFile.isSafari) {
+        //Creating new link node.
+        var link = document.createElement('a');
+        link.href = sUrl;
+        link.setAttribute('target','_blank');
+
+        if (link.download !== undefined) {
+            //Set HTML5 download attribute. This will prevent file from opening if supported.
+            var fileName = sUrl.substring(sUrl.lastIndexOf('/') + 1, sUrl.length);
+            link.download = fileName;
+        }
+
+        //Dispatching click event.
+        if (document.createEvent) {
+            var e = document.createEvent('MouseEvents');
+            e.initEvent('click', true, true);
+            link.dispatchEvent(e);
+            return true;
+        }
+    }
+
+    // Force file download (whether supported by server).
+    if (sUrl.indexOf('?') === -1) {
+        sUrl += '?download';
+    }
+
+    window.open(sUrl, '_blank');
+    return true;
+}
+
+window.downloadFile.isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+window.downloadFile.isSafari = navigator.userAgent.toLowerCase().indexOf('safari') > -1;
+
+
+}
+
+
+
+/*
+var config = {
+  method: 'post',
+  url: 'http://104.251.218.154:8081/downloader/download_links',
+  headers: { 
+    'Content-Type': 'application/json'
+  },
+  data : data
+};
+
+axios(config)
+.then(function (response) {
+  console.log('Then: ');
+  console.log('JSON.stringify: ');
+  console.log(JSON.stringify(response.data));
+  
+  console.log('response.data: ');
+  console.log(response.data);
+  
+  for(var k in result) {
+   console.log(k, result[k]);
+  }
+
+  
+})
+.catch(function (error) {
+  console.log('Error: ');
+  console.log(error);
+});
+
+*/
+</script>
+</body>
+</html>

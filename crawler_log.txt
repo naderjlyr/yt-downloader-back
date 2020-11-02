@@ -1,0 +1,139 @@
+
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m Unable to download webpage: <urlopen error [Errno -5] No address associated with hostname> (caused by URLError(gaierror(-5, 'No address associated with hostname')))
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m Unable to download webpage: <urlopen error [Errno 110] Connection timed out> (caused by URLError(TimeoutError(110, 'Connection timed out')))
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m requested format not available
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m requested format not available
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m requested format not available
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m requested format not available
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 30, Func.Name : post, Message : result = ydl.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : TypeError 
+ Exception message : argument of type 'NoneType' is not iterable
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : if 'entries' in result:"]
+ URL : https://www.youtube.com/watch?v=EvxqdTPQhuU
+ Exception type : TypeError 
+ Exception message : argument of type 'NoneType' is not iterable
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : if 'entries' in result:"]
+ URL : https://www.youtube.com/watch?v=qgLHX4URJZE&list=RDfQdBHWoSK18&index=2
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 37, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=qgLHX4URJZE&list=RDfQdBHWoSK18&index=2
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=qgLHX4URJZE&list=RDfQdBHWoSK18&index=2
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 40, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 40, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 35, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 35, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 35, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 32, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : IndexError 
+ Exception message : list index out of range
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : video = result['entries'][0]"]
+ URL : https://www.youtube.com/watch?v=6UwPXEKT7PY&list=RDGMEMQ1dJ7wXfLlqCjwV0xfSNbAVM6UwPXEKT7PY&start_radio=1
+ Exception type : KeyError 
+ Exception message : 'formats'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 37, Func.Name : post, Message : video_urls = video['formats']"]
+ URL : https://www.youtube.com/playlist?list=PLFftu4DSZBSwrGiOlZXKHRSoKArsKSuz9
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m NnzSkIjrtQ0: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 28, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 808, Func.Name : extract_info, Message : return self.process_ie_result(ie_result, download, extra_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 1006, Func.Name : process_ie_result, Message : entry_result = self.process_ie_result(entry,', "File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 867, Func.Name : process_ie_result, Message : return self.extract_info(ie_result['url'],", 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/playlist?list=PLFftu4DSZBSwrGiOlZXKHRSoKArsKSuz9
+ Exception type : KeyError 
+ Exception message : 'entries'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 34, Func.Name : post, Message : for slug in video['entries']:"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : KeyError 
+ Exception message : 'entries'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 34, Func.Name : post, Message : for slug in video['entries']:"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : KeyError 
+ Exception message : 'entries'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 34, Func.Name : post, Message : for slug in video['entries']:"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : KeyError 
+ Exception message : 'url'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : print(base_url + slug['url'])"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : KeyError 
+ Exception message : 'url'
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 37, Func.Name : post, Message : print(base_url + slug['url'])"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m 6E2hYDasdas: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=6E2hYDasdasdasIFDIU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m 6E2hYDasdas: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=6E2hYDasdasdasIFDIU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m 6E2hYDasdas: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=6E2hYDasdasdasIFDIU
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m 6E2hYDasdas: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=6E2hYDasdasdasIFDIU
+ Exception type : KeyError 
+ Exception message : 'formats'
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : self.get_playlist(video_information, result, format_id)', "File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 77, Func.Name : get_playlist, Message : if single_format['formats']['format_id'] in playlist_links.keys():"]
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m -dZQN6yp28U: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 808, Func.Name : extract_info, Message : return self.process_ie_result(ie_result, download, extra_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 1006, Func.Name : process_ie_result, Message : entry_result = self.process_ie_result(entry,', "File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 867, Func.Name : process_ie_result, Message : return self.extract_info(ie_result['url'],", 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m -dZQN6yp28U: YouTube said: Unable to extract video data
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : result = ydl.extract_info(video_link, download=False)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 808, Func.Name : extract_info, Message : return self.process_ie_result(ie_result, download, extra_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 1006, Func.Name : process_ie_result, Message : entry_result = self.process_ie_result(entry,', "File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 867, Func.Name : process_ie_result, Message : return self.extract_info(ie_result['url'],", 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 820, Func.Name : extract_info, Message : self.report_error(compat_str(e), e.format_traceback())', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ URL : https://www.youtube.com/watch?v=-dZQN6yp28U&list=PLdawRnR9ilZAQ9nFJp6zTlDYFqBQFVGbd
+ Exception type : KeyError 
+ Exception message : 'title'
+ Stack trace : ['File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 36, Func.Name : post, Message : self.get_playlist(video_information, result, format_id)', "File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 75, Func.Name : get_playlist, Message : 'url': single_format['url'], 'title': single_format['title'],"]
+ URL : https://www.youtube.com/watch?v=535acCxjHCI&list=PLQVvvaa0QuDcDqgpLLJJM15NpIGNfrKY5
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m ffprobe/avprobe and ffmpeg/avconv not found. Please install one.
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : a = ydl.download(['http://www.youtube.com/watch?v=BaW_jenozKc'])", 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2018, Func.Name : download, Message : res = self.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 808, Func.Name : extract_info, Message : return self.process_ie_result(ie_result, download, extra_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 863, Func.Name : process_ie_result, Message : return self.process_video_result(ie_result, download=download)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 1644, Func.Name : process_video_result, Message : self.process_info(new_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2000, Func.Name : process_info, Message : self.post_process(filename, info_dict)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2067, Func.Name : post_process, Message : self.report_error(e.msg)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
+ Exception type : DownloadError 
+ Exception message : [0;31mERROR:[0m ffprobe/avprobe and ffmpeg/avconv not found. Please install one.
+ Stack trace : ["File : /home/luffy/PycharmProjects/downloader/downloads/views.py , Line : 33, Func.Name : post, Message : a = ydl.download(['http://www.youtube.com/watch?v=BaW_jenozKc'])", 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2018, Func.Name : download, Message : res = self.extract_info(', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 808, Func.Name : extract_info, Message : return self.process_ie_result(ie_result, download, extra_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 863, Func.Name : process_ie_result, Message : return self.process_video_result(ie_result, download=download)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 1644, Func.Name : process_video_result, Message : self.process_info(new_info)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2000, Func.Name : process_info, Message : self.post_process(filename, info_dict)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 2067, Func.Name : post_process, Message : self.report_error(e.msg)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 625, Func.Name : report_error, Message : self.trouble(error_message, tb)', 'File : /home/luffy/PycharmProjects/downloader/venv/lib/python3.8/site-packages/youtube_dl/YoutubeDL.py , Line : 595, Func.Name : trouble, Message : raise DownloadError(message, exc_info)']
