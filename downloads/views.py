@@ -12,10 +12,6 @@ import os
 from django.conf import settings
 
 
-def download(request, path):
-    path = 'requirement.txt'
-
-
 class DownloadVideo(APIView):
     permission_classes = [AllowAny]
 
@@ -83,13 +79,13 @@ class DownloadVideo(APIView):
                 print(msg)
 
         def my_hook(d):
-
             if d['status'] == 'finished':
                 global path_name
                 path_name = d['filename']
                 return d
                 # print(d)
                 # print('Done downloading, now converting ...')
+
         now = datetime.now().timestamp()
         media_dir = settings.MEDIA_ROOT
         new_file_name = 'downloaded_files/' + str(now) + '.mp3'
@@ -108,6 +104,7 @@ class DownloadVideo(APIView):
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([video_link])
+        return ["/media/" + str(new_file_name), new_file_name]
 
     def get_playlist(self, playlist_links, result, format_id):
         playlist_links['playlist'] = True
