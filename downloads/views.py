@@ -1,22 +1,15 @@
 from __future__ import unicode_literals
-import json
+
 import sys
-import traceback
-from datetime import datetime, time
-from time import time
-
-import youtube_dl
-from http.client import HTTPResponse
-
-from django.shortcuts import render
+from datetime import datetime
+from shutil import copyfile
+import youtube_dlc as youtube_dl
 from rest_framework import status
-from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import os
 from django.conf import settings
-from django.http import HttpResponse, Http404, FileResponse
 
 
 def download(request, path):
@@ -92,42 +85,29 @@ class DownloadVideo(APIView):
         def my_hook(d):
 
             if d['status'] == 'finished':
-                global path
-                path = d['filename']
+                global path_name
+                path_name = d['filename']
                 return d
                 # print(d)
                 # print('Done downloading, now converting ...')
+        now = datetime.now().timestamp()
+        media_dir = settings.MEDIA_ROOT
+        new_file_name = 'downloaded_files/' + str(now) + '.mp3'
+        new_file_path = os.path.join(media_dir, new_file_name)
 
         ydl_opts = {
             'format': 'bestaudio/best',
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'mp3',
-                'preferredquality': '192',
+                'preferredquality': '140',
             }],
+            'outtmpl': new_file_path,
             'logger': MyLogger(),
             'progress_hooks': [my_hook],
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([video_link])
-        from django.conf import settings
-        from shutil import copyfile
-        base_dir = settings.BASE_DIR
-        # media_dir = os.path.join(base_dir, 'media')
-        media_dir = settings.MEDIA_ROOT
-        settings_dir = os.path.dirname(__file__)
-        PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
-        old_file_path = os.path.join(PROJECT_ROOT, ''.join(path.split('.')[:-1]) + '.mp3')
-        # old_file_path = os.path.join(media_dir, '')
-        dir_name = 'downloaded_files'
-        if not os.path.exists(os.path.join(media_dir, dir_name)):
-            os.makedirs(os.path.join(media_dir, dir_name))
-        now = datetime.now().timestamp()
-        new_file_name = 'downloaded_files/' + str(now) + '.mp3'
-        new_file_path = os.path.join(media_dir, new_file_name)
-        copyfile(old_file_path, new_file_path)
-        os.remove(old_file_path)
-        return ["/media/" + str(new_file_name), path]
 
     def get_playlist(self, playlist_links, result, format_id):
         playlist_links['playlist'] = True

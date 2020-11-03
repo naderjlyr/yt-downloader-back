@@ -4,7 +4,7 @@
     1.1.2 python3 -m venv venv
 
 2. inside the project run:
-    2.1 pip install youtube_dl
+    2.1 python -m pip install --upgrade youtube-dlc
     2.2 pip install django
     2.3 pip install djangorestframework
     2.4 pip install django-cors-headers
