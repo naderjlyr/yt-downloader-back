@@ -138,22 +138,14 @@ def get_playlist(playlist_links, result, format_id):
 
 
 def single_url(format_id, video_link):
-    downloader_params = {"format": "bestaudio", "postprocessors": [
-        {
-            "key": "FFmpegExtractAudio",
-            "preferredcodec": "mp3",
-            "preferredquality": "192",
-        }]}
     ydl = youtube_dl.YoutubeDL({'audioformat': "mp3",
                                 })
-
     with ydl:
         result = ydl.extract_info(video_link, download=False)
     if 'entries' in result:
         video = result['entries'][0]
     else:
         video = result
-
     video_urls = video['formats']
     formatted_file = {"playlist": False, 'formats': {'0': []}}
 

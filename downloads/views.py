@@ -13,7 +13,12 @@ class DownloadVideo(viewsets.ViewSet):
     permission_classes = [AllowAny]
 
     @staticmethod
-    def generate_url(request, video_link, format_id=None):
+    def generate_url(request):
+        data = request.data
+        video_link = data['video_link']
+        format_id = None
+        if 'format_id' in data.keys():
+            format_id = data['format_id']
         if format_id == 'mp3':
             file_path = get_mp3(video_link)
             response = {"status": "success", "code": status.HTTP_200_OK,
@@ -32,7 +37,6 @@ class DownloadVideo(viewsets.ViewSet):
                 get_playlist(video_information, result, format_id)
             else:
                 video_information = single_url(format_id, video_link)
-
             response = {"status": "success", "code": status.HTTP_200_OK, "data": video_information, "message": []}
             if len(video_information) == 0:
                 response = {"status": "error", "code": status.HTTP_204_NO_CONTENT,
@@ -41,7 +45,7 @@ class DownloadVideo(viewsets.ViewSet):
             response = {"status": "error", "code": status.HTTP_204_NO_CONTENT,
                         "data": {"message": "no content found"}, "message": []}
 
-        return response
+        return Response(response, status=status.HTTP_200_OK)
         # except BaseException as ex:
         #     ex_type, ex_value, ex_traceback = sys.exc_info()
         #     trace_back = traceback.extract_tb(ex_traceback)
