@@ -6,14 +6,14 @@ from rest_framework.response import Response
 import requests
 import youtube_dlc as youtube_dl
 
-from downloads.functions import get_mp3, get_playlist, single_url, get_single_detail
+from downloads.view.youtube.youtube_functions import get_mp3, get_playlist, single_url, get_single_detail
 
 
 class DownloadVideo(viewsets.ViewSet):
     permission_classes = [AllowAny]
 
     @staticmethod
-    def generate_url(request):
+    def generate_youtube_url(request):
         data = request.data
         video_link = data['video_link']
         format_id = None
