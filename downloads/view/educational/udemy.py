@@ -45,16 +45,17 @@ def get_single_udemy(url_slug, category='video-tutorials'):
             'description': '',
             'url_slug': url_slug,
             'image': image_url,
-            'download_links': download_links
+            'download_links': download_links,
+            'categories': None
             }
 
 
 if __name__ == '__main__':
     print(get_single_udemy('crash-course-electronics-and-pcb-design'))
     # print(get_single_udemy('100-days-of-code-the-complete-python-pro-bootcamp-for-2021'))
-    # for page_number in range(1, 200):
-    #     for url_slug in get_all_udemy_links(page_number=page_number):
-    #         print(get_single_udemy(url_slug))
+    for page_number in range(1, 200):
+        for url_slug in get_all_udemy_links(page_number=page_number):
+            print(get_single_udemy(url_slug))
 out_sample = {'name': 'title',
               'farsi_name': 'description',
               'description': '',

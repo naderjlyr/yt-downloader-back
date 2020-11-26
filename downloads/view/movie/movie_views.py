@@ -44,13 +44,10 @@ def get_download_links_series_azintv(post_id) -> list:
     download_links = soup_download_links.find_all('h3')
     for download_link in download_links:
         series_link = download_link.findNext('a')['href']
-        print(series_link)
-        # http://dls1.mydownloadcenter.pw/Series/D/Designated%20Survivor/S03/720p%20WEBRip%20%20AAC%202CH%20%20x265%20PSA%20230MB/Designated_Survivor_S03E01_x265_720p_WEBRip_PSA.mkv
         response_series = requests.request("GET", series_link)
         soup_series = BeautifulSoup(response_series.text, 'html.parser')
         series_links = [{'title': series_element.find('a').text, 'link': series_element.find('a')['href']} for
                         series_element in soup_series.find_all('tr')[1:]]
-        print(series_links)
     download_links = [{
         "title": clean_text(download_link.text),
         "link": [],
@@ -98,7 +95,7 @@ def subtitle_almas_download(imdb_id, year, film_type='Movies'):
     return []
 
 
-def all_genres() -> list:
+def get_all_genres() -> list:
     """
     :rtype: list
     """
@@ -114,7 +111,7 @@ def all_genres() -> list:
 
 
 #
-def all_movie_imdb_ids(movie_genre: str, page_number: str = '2', film_type: str = 'movie') -> list:
+def get_all_movie_imdb_ids(movie_genre: str, page_number: str = '2', film_type: str = 'movie') -> list:
     """
     :param movie_genre:
     :param page_number:
@@ -132,7 +129,7 @@ def all_movie_imdb_ids(movie_genre: str, page_number: str = '2', film_type: str 
     return imdb_ids
 
 
-def single_movie(imdb_id, film_type="movie"):
+def get_single_movie(imdb_id, film_type="movie"):
     """
     :param imdb_id:
     :param film_type: series, movie
@@ -146,7 +143,7 @@ def single_movie(imdb_id, film_type="movie"):
     post_id = soup_detail.find('div', class_='downloadlinks text-center')['id']
     # DOWNLOAD LINKS
 
-    imdb_data = imdb_single_info("tt" + imdb_id)
+    imdb_data = get_imdb_single_info("tt" + imdb_id)
     name = imdb_data['name']
     description = clean_text(imdb_data['description'])
     genres = imdb_data['genres']
@@ -182,12 +179,11 @@ def single_movie(imdb_id, film_type="movie"):
         'imdb_rate': imdb_rate,
         'image': image,
         'download_links': download_urls,
-
     }
     # END DOWNLOAD LINKS
 
 
-def imdb_single_info(imdb_id):
+def get_imdb_single_info(imdb_id):
     url = "https://www.imdb.com/title/" + str(imdb_id)
     response = requests.request("GET", url)
     response = response.text.encode('utf8').decode()
@@ -224,33 +220,30 @@ def imdb_single_info(imdb_id):
     }
 
 
-# print(imdb_single_info('tt7556122'))
-# print(single_movie('5296406/', film_type="tvshow"))
-# print(single_movie('8630154'))
-if __name__ == '__main__':
-    all_genres = all_genres()
-    print(all_genres)
-    for genre in all_genres:
-        imdb_ids = all_movie_imdb_ids(genre)
-        print(imdb_ids)
-        for imdb_id in imdb_ids:
-            print(single_movie(imdb_id))
-sample_out = {
-    'name': '',
-    'farsi_name': '',
-    'description': "",
-    'genres': ['Mystery'],
-    'country': 'South Korea',
-    'year': '2020',
-    'main_language': 'Korean',
-    'subtitles': [],
-    'duration': '1h 37min',
-    'imdb_id': '11727052',
-    'imdb_rate': '5.7',
-    'image': 'https://m.media-amazon.com/images/M268_AL_.jpg',
-    'download_links': [{'title': '',
-                        'link': [
-                            'http:.1080p.10bit.BluRay.x265.HEVC.VXT.mp4'],
-                        'subtitle': '',
-                        'quality': '1080p'},
-                       ]}
+# if __name__ == '__main__':
+#     all_genres = get_all_genres()
+#     print(all_genres)
+#     for genre in all_genres:
+#         imdb_ids = get_all_movie_imdb_ids(genre)
+#         print(imdb_ids)
+#         for imdb_id in imdb_ids:
+#             print(get_single_movie(imdb_id))
+# sample_out = {
+#     'name': '',
+#     'farsi_name': '',
+#     'description': "",
+#     'genres': ['Mystery'],
+#     'country': 'South Korea',
+#     'year': '2020',
+#     'main_language': 'Korean',
+#     'subtitles': [],
+#     'duration': '1h 37min',
+#     'imdb_id': '11727052',
+#     'imdb_rate': '5.7',
+#     'image': 'https://m.media-amazon.com/images/M268_AL_.jpg',
+#     'download_links': [{'title': '',
+#                         'link': [
+#                             'http:.1080p.10bit.BluRay.x265.HEVC.VXT.mp4'],
+#                         'subtitle': '',
+#                         'quality': '1080p'},
+#                        ]}
