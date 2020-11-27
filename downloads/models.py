@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.postgres.fields import JSONField, ArrayField
 from django.utils import timezone
 
+from downloads.choices import MoviesChoices
+
 
 class Adult(models.Model):
     name = models.CharField(max_length=200, null=True, blank=True)
@@ -36,6 +38,7 @@ class Movie(models.Model):
     genres = ArrayField(models.CharField(max_length=20), null=True, blank=True)
     image = models.CharField(max_length=200, null=True, blank=True)
     download_links = ArrayField(JSONField(null=True, blank=True), null=True, blank=True)
+    movie_type = models.CharField(max_length=2, choices=MoviesChoices.choices, default=MoviesChoices.MOVIE)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     country = models.CharField(max_length=30, null=True, blank=True)

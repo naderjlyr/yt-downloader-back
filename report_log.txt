@@ -47,4 +47,42 @@ movie count: 0
 2020-11-24 16:57:42.595232 _______Crawling starts_______ 
   
 2020-11-24 16:58:59.823897 _______Crawling starts_______ 
+  
+2020-11-27 12:56:44.981695 _______Crawling starts_______ 
+  
+2020-11-27 13:21:21.934655 _______Crawling starts_______ 
+  
+2020-11-27 13:23:06.312083 _______Crawling starts_______ 
+  
+2020-11-27 13:26:18.840449 _______Crawling starts_______ 
+  
+2020-11-27 13:29:04.797854 _______Crawling starts_______ 
+  
+2020-11-27 13:31:26.270596 _______Crawling starts_______ 
+  
+2020-11-27 13:31:56.331793 _______Crawling starts_______ 
+  
+2020-11-27 13:33:10.581804 _______Crawling starts_______ 
+  
+2020-11-27 13:33:51.791147 _______Crawling starts_______ 
+  
+2020-11-27 13:35:08.300593 _______Crawling starts_______ 
+  
+2020-11-27 13:35:39.230362 _______Crawling starts_______ 
+  
+2020-11-27 13:36:11.966415 _______Crawling starts_______ 
  
+ Exception type : KeyboardInterrupt 
+ Exception message : 
+ Stack trace : ['File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\movie.py , Line : 53, Func.Name : get_azintv_movie, Message : set_sleep(2)', 'File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\movie.py , Line : 15, Func.Name : set_sleep, Message : time.sleep(seconds)']
+ URL : {'name': 'Swamp Thing', 'farsi_name': '', 'description': 'Abby Arcane returns home to Marais, Louisiana to investigate a deadly swamp-borne virus, only to discover the dark, terrifying mysteries of the swamp.', 'genres': ['Action', 'Adventure', 'Drama'], 'country': 'USA', 'year': None, 'main_language': 'English', 'subtitles': [], 'duration': '1h', 'imdb_id': '8362852', 'imdb_rate': '7.6', 'image': 'https://m.media-amazon.com/images/M/MV5BMGFhZDE1NWMtZDY0Yi00MWNmLTkxZGEtNzYzYzU4ZTE5NDgwXkEyXkFqcGdeQXVyNTE1NjY5Mg@@._V1_UY268_CR16,0,182,268_AL_.jpg', 'download_links': []}
+movie count: 1 
+2020-11-27 13:40:19.502451 _______Crawling starts_______ 
+  
+2020-11-27 13:41:42.671447 _______Crawling starts_______ 
+  
+2020-11-27 13:42:26.371230 _______Crawling starts_______ 
+  
+2020-11-27 15:43:31.010695 _______Crawling starts_______ 
+ 
+MV count: 453
