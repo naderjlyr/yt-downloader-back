@@ -11,6 +11,9 @@ def get_all_udemy_links(page_number=1, category='video-tutorials'):
     return links
 
 
+get_all_udemy_links()
+
+
 def get_single_udemy(url_slug, category='video-tutorials'):
     url = "https://downloadly.ir/elearning/" + category + "/" + str(url_slug)
     response = requests.request("GET", url)
@@ -28,11 +31,19 @@ def get_single_udemy(url_slug, category='video-tutorials'):
         if header_tag.text == 'لینک دانلود':
             download_link_title = ''
             for tags in header_tag.findAllNext():
+                if tags.name == "h5":
+                    break
                 if tags.name == "h4":
                     download_link_title = tags.text
                 if tags.name == "a":
                     try:
                         download_link = tags['href']
+                        if tags.text.__contains__('قیمت به') or \
+                                tags.text.__contains__('ارتباط با ما') or \
+                                tags.text.__contains__('Price in') or \
+                                tags.text.__contains__('پرداخت') or \
+                                tags.text.__contains__('نهایی کردن خرید'):
+                            continue
                         download_link_name = "password: www.downloadly.ir" + download_link_title + " " + tags.text
                         download_links.append({
                             'title': download_link_name,

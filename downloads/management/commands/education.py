@@ -23,10 +23,11 @@ class Command(BaseCommand):
         log_counter = 0
         for page_number in range(1, 100):
             for url_slug in get_all_udemy_links(page_number=page_number):
+                print(url_slug)
                 single_udemy = get_single_udemy(url_slug)
                 print(single_udemy)
                 # try:
-                Educational.objects.create(**single_udemy)
+                # Educational.objects.create(**single_udemy)
                 log_counter += 1
                 # except BaseException as _:
                 #     ex_type, ex_value, ex_traceback = sys.exc_info()
