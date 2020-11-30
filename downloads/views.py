@@ -19,11 +19,10 @@ class SearchPost(viewsets.ViewSet):
             ]
         all_search = {'movies': [], 'adult': [], 'educational': [], 'youtube': []}
         if 'movies' in filtering_type:
-            movies = Movie.objects.filter(genres__contains=['Action'])
-            # models.Q(name__contains=search_query) | models.Q(description__contains=search_query) | models.Q(
-            #     farsi_name__contains=search_query) |
-            # models.Q(
-            #     genres__in=[["action"]]))
+            movies = Movie.objects.filter(
+                models.Q(name__contains=search_query) | models.Q(description__contains=search_query) | models.Q(
+                    farsi_name__contains=search_query) |
+                models.Q(genres__contains=['Action']))
             all_search['movies'] = movies.values()
         if 'adult' in filtering_type:
             adult = Adult.objects.filter(
