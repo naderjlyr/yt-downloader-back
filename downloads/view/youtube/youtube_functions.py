@@ -72,8 +72,6 @@ def get_single_detail(video_url):
             "description": video_details['shortDescription']}
 
 
-
-
 def get_mp3(video_link):
     class MyLogger(object):
         def debug(self, msg):
@@ -161,3 +159,135 @@ def single_url(format_id, video_link):
         else:
             formatted_file['formats']['0'].append(output)
     return formatted_file
+
+
+def youtube_multiple_queries(query_phrase):
+    url = YOUTUBE_URL
+    payload = youtube_payload(query_phrase)
+    headers = YOUTUBE_HEADER
+
+    response = requests.request("POST", url, headers=headers, data=payload.encode('utf-8'))
+    query_result_items = \
+        json.loads(response.text)['contents']['twoColumnSearchResultsRenderer']['primaryContents'][
+            'sectionListRenderer']['contents']
+    all_items_detail = []
+    for item in query_result_items:
+        if 'itemSectionRenderer' in item.keys():
+            item_contents = item['itemSectionRenderer']['contents']
+            for item_content in item_contents:
+                if 'videoRenderer' in item_content.keys():
+                    item_content = item_content['videoRenderer']
+                    video_id = item_content['videoId']
+                    image = item_content['thumbnail']['thumbnails'][0]['url']
+                    title = item_content['title']['runs'][0]['text']
+                    published_time_text = ""
+                    if "publishedTimeText" in item_content.keys():
+                        published_time_text = item_content['publishedTimeText']['simpleText']
+                    video_duration = ''
+                    if 'lengthText' in item_content.keys():
+                        video_duration = item_content['lengthText']['simpleText']
+                    view_count_text = ""
+                    if "viewCountText" in item_content.keys():
+                        view_count_text = item_content['viewCountText']['simpleText']
+                    owner_text = item_content['ownerText']['runs'][0]['text']
+                    description = ""
+                    if "descriptionSnippet" in item_content.keys():
+                        description = item_content['descriptionSnippet']['runs']
+                        description = ' '.join([desc_item['text'] for desc_item in description])
+                    video_url = "https://www.youtube.com/watch?v=" + video_id
+                    all_items_detail.append(
+                        {
+                            "published_time_text": published_time_text,
+                            "video_duration": video_duration,
+                            "view_count_text": view_count_text,
+                            "owner_text": owner_text,
+                            "video_id": video_id,
+                            "url": video_url,
+                            "image": image,
+                            "title": title,
+                            "description": description,
+                        })
+    response = {
+        "status": "success",
+        "data": all_items_detail
+    }
+    return response
+
+
+# STATICS
+YOUTUBE_URL = "https://www.youtube.com/youtubei/v1/search?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8"
+
+YOUTUBE_HEADER = {
+    'authority': 'www.youtube.com',
+    'pragma': 'no-cache',
+    'cache-control': 'no-cache',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  'Chrome/86.0.4240.111 Safari/537.36',
+    'x-goog-visitor-id': 'CgstSE92QkNyMkR6dyijy4P9BQ%3D%3D',
+    'content-type': 'application/json',
+    'accept': '*/*',
+    'origin': 'https://www.youtube.com',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-mode': 'same-origin',
+    'sec-fetch-dest': 'empty',
+    'referer': 'https://www.youtube.com/results?search_query=ich+will',
+    'accept-language': 'en-US,en;q=0.9',
+    'cookie': 'YSC=42bhoyRJBxk; VISITOR_INFO1_LIVE=-HOvBCr2Dzw; PREF=f4=4000000; ST-1l9ld2b='
+              'oq=ich%20will&gs_l=youtube.12...0.0.0.3454.0.0.0.0.0.0.0.0..0.0.ytdw_cc9%2Cytpo'
+              '-bo-se%3D0%2Cytposo-bo-me%3D0%2Ccfro%3D1%2Cytpo-bo-se%3D1%2Cytposo-bo-me%3D1%'
+              '2Cytpo-bo-so-dw%3D1%2Cytpo-bo-so-dwm%3D3%2Cytpo-bo-so-dwb%3D100-0%2Cytposo-bo-'
+              'so-dw%3D1%2Cytposo-bo-so-dwm%3D3%2Cytposo-bo-so-dwb%3D100-0...0...1ac..64.youtube'
+              '..0.0.0....0.&itct=CBkQ7VAiEwjSxZjAzeXsAhVEHuAKHT8cCnI%3D&csn=MC4zOTA1ODIwMjAwNzk3MTI1NA'
+              '..&endpoint=%7B%22clickTrackingParams%22%3A%22CBkQ7VAiEwjSxZjAzeXsAhVEHuAKHT8cCnI%3D%22'
+              '%2C%22commandMetadata%22%3A%7B%22webCommandMetadata%22%3A%7B%22url%22%3A%22%2Fresults%'
+              '3Fsearch_query%3Dich%2Bwill%22%2C%22webPageType%22%3A%22WEB_PAGE_TYPE_SEARCH%22%2C%'
+              '22rootVe%22%3A4724%7D%7D%2C%22searchEndpoint%22%3A%7B%22query%22%3A%22ich%20will%22%7D%7D; '
+              'SIDCC=AJi4QfHG-7hHvSiRHFqxEFJNjaNsI38pe4qMVQP7ai5NpZ6GkZygcxt7PCsDEFVac4HDhbU3gA; '
+              '__Secure-3PSIDCC=AJi4QfElnlc41NICzjaRiqEqJ49DjtDmwBAAa0yBeq34PA3_UAQjd3WcPeTNdwXSVuKNKvTnqA '
+}
+
+
+def youtube_payload(query_phrase):
+    return "{\"context\":{\"client\":{\"hl\":\"en\",\"gl\":\"TR\",\"geo\":\"TR\",\"remoteHost\"" \
+           ":\"178.244.119.96\",\"isInternal\":true,\"deviceMake\":\"\",\"deviceModel\":\"\"," \
+           "\"visitorData\":\"CgstSE92QkNyMkR6dyijy4P9BQ%3D%3D\",\"userAgent\":\"Mozilla/5.0" \
+           " (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)" \
+           " Chrome/86.0.4240.111 Safari/537.36,gzip(gfe)\",\"cli" \
+           "entName\":\"WEB\",\"clientVersion\":\"2.20201101.02.00\",\"osName\":\"Windows\",\"osVersion" \
+           "\":\"10.0\",\"originalUrl\":\"https://www.youtube.com/results?search_query=ich+will\"" \
+           ",\"playerT" \
+           "ype\":\"UNIPLAYER\",\"gfeFrontlineInfo\":\"vip=172.217.169.110,server_port=443," \
+           "client_port=39909," \
+           "tcp_connection_request_count=0,header_order=HUAEL,gfe_version=2.693.1,ssl,ssl_info" \
+           "=TLSv1.3:RNA:T,tlsext=S,sni=www.youtube.com,hex_encoded_client_hello=6a6a130113021303c0" \
+           "2bc02fc02cc030cca9cca8c013c014009c009d002f0035-00-fafa00000017ff01000a000b002300100005000d00" \
+           "120033002d002b001b9a9a0015,c=1301,pn=alpn,ja3=b32309a26951912be7dba376398abc3b,rtt_source=tc" \
+           "p,rtt=34,srtt=34,client_protocol=h2,client_transport=tcp,first_request=1,ip_block_version=1,ip" \
+           "_block_index=980205,gfe=acsofg9,pzf=Linux 2.2.x-3.x [4:54+10:0:1420:65535/10:mss/sok/ts/nop" \
+           "/ws:d" \
+           "f/id+:0] [generic tos:0x20],vip_region=default,asn=16135,cc=TR,eid=o-WgX9nqK8nV8wfn7J6ACg,sch" \
+           "eme=https\",\"clientFormFactor\":\"UNKNOWN_FORM_FACTOR\",\"newVisitorCookie\":true,\"" \
+           "countryLoca" \
+           "tionInfo\":{\"countryCode\":\"TR\",\"countrySource\":\"COUNTRY_SOURCE_IPGEO_INDEX\"},\"browser" \
+           "Name\":\"Chrome\",\"browserVersion\":\"86.0.4240.111\",\"screenWidthPoints\":1209,\"scre" \
+           "enHeightPoints\":208,\"screenPixelDensity\":2,\"screenDensityFloat\":1.5,\"utcOffsetMinutes" \
+           "\":180,\"userInterfaceTheme\":\"USER_INTERFACE_THEME_LIGHT\",\"connectionType\":\"CONN_CELL" \
+           "ULAR_4G\",\"mainAppWebInfo\":{\"graftUrl\":\"/results?search_query=ich+will\"}},\"user\":{\"lo" \
+           "ckedSafetyMode\":false},\"request\":{\"useSsl\":true,\"sessionId\":6890759919261400000,\"paren" \
+           "tEventId\":{\"timeUsec\":1604380067747748,\"serverIp\":182453394,\"processId\":403055733},\"" \
+           "internalExperimentFlags\":[{\"key\":\"force_share_tooltip\",\"value\":\"false\"}],\"consist" \
+           "encyTokenJars\":[]},\"clickTracking\":{\"clickTrackingParams\":" \
+           "\"IhMIpK+XwM3l7AIVkgTgCh11JAYY\"}," \
+           "\"adSignalsInfo\":{\"consentBumpParams\":{\"consentHostnameOverride\":\"" \
+           "https://www.youtube.com\"," \
+           "\"urlOverride\":\"\"}}},\"query\":\"" + query_phrase + "\",\"consentBumpParams\":{" \
+                                                                   "\"consentHostnameOverride\":\"" \
+                                                                   "https://www.youtube.com\",\"url" \
+                                                                   "Override\":\"\"}," \
+                                                                   "\"webSearchboxStatsUrl\":\"/s" \
+                                                                   "earch?oq=" + str(
+        query_phrase) + \
+           "&gs_l=youtube.12...0.0.0.3454.0.0.0.0.0.0.0.0..0.0.ytdw_cc9,ytpo-bo-se=0,ytposo-bo-me=0," \
+           "cfro=1,ytpo-bo-se=1,ytposo-bo-me=1,ytpo-bo-so-dw=1,ytpo-bo-so-dwm=3,ytpo-bo-so-dwb=100-0," \
+           "ytposo-bo-so-dw=1,ytposo-bo-so-dwm=3,ytposo-bo-so-dwb=100-0" \
+           "...0...1ac..64.youtube..0.0.0....0.\"} "
