@@ -11,9 +11,6 @@ def get_all_udemy_links(page_number=1, category='video-tutorials'):
     return links
 
 
-get_all_udemy_links()
-
-
 def get_single_udemy(url_slug, category='video-tutorials'):
     url = "https://downloadly.ir/elearning/" + category + "/" + str(url_slug)
     response = requests.request("GET", url)

@@ -108,7 +108,8 @@ class DownloadVideo(viewsets.ViewSet):
             'authority': 'clients1.google.com',
             'pragma': 'no-cache',
             'cache-control': 'no-cache',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36',
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/86.0.4240.111 Safari/537.36',
             'accept': '*/*',
             'x-client-data': 'CIu2yQEIorbJAQjEtskBCKmdygEIlqzKAQisx8oBCPbHygEI6cjKAQi0y8oBCNzVygEImJrLARiKwcoB',
             'sec-fetch-site': 'cross-site',
@@ -116,7 +117,10 @@ class DownloadVideo(viewsets.ViewSet):
             'sec-fetch-dest': 'script',
             'referer': 'https://www.youtube.com/',
             'accept-language': 'en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7',
-            'cookie': 'CONSENT=YES+RU.en+20161120-18-0; __Secure-3PAPISID=oUbIMxMt839AqcNc/A50d9Gl02LFn7lXWm; __Secure-3PSID=2Afh5Nv3JLDpNlfOM4eVz2tuUSKv1Ulv9NAJQL2buPkCuoeUDPiaJylKGz5WB-NIqq8UYw.; NID=204=oSBYio-H8M_d4a0s1ASKQJ2En-1INWKL9Eq4zzZMX_xfYh5zOe2FBFkZNJy6oph2ayRWTuyDMZoZJ9_XIjdmi6KatpnoPjBl49VhRjx7jtQivtUVXciAqf4GjSzsFy8FemH3i8UYymvwcLFUHQMZoMZcKxOiyJB7kZPb9I7FlvsluIonHfKk4z6-2817D3518R_9Y34nNXBwuoNV7xaATneGrINxRmFgtWDO4OOvRllNWyT4swKO5J-EFp-lvWigzjN0evJ9M7KzKZ8ojpP1VLltFj8L-5Voeey2rXlcfsWkROV6URAi8nU7xd173330CYnLte921KHB; 1P_JAR=2020-11-03-04; __Secure-3PSIDCC=AJi4QfFLaAE8IRT_9HrxqxxrmdaOmRz6pfKDwGQ0pGem79mz78KKFJzkPGeJE0azL9oFbpHlhlu8; __Secure-3PSIDCC=AJi4QfHd0SqU_m1LJFh-jZv5iaawZeeQ5Dz8gINnYM1btsdUOMVsr2b9iPAIir0RHGjkfgnH06Rv'
+            'cookie': 'CONSENT=YES+RU.en+20161120-18-0; __Secure-3PAPISID=oUbIMxMt839AqcNc/A50d9Gl02LFn7lXWm; '
+                      '__Secure-3PSID=2Afh5Nv3JLDpNlfOM4eVz2tuUSKv1Ulv9NAJQL2buPkCuoeUDPiaJylKGz5WB-NIqq8UYw.; '
+                      'NID=204=oSBYio-H8M_d4a0s1ASKQJ2En'
+                      '-1INWKL9Eq4zzZMX_xfYh5zOe2FBFkZNJy6oph2ayRWTuyDMZoZJ9_XIjdmi6KatpnoPjBl49VhRjx7jtQivtUVXciAqf4GjSzsFy8FemH3i8UYymvwcLFUHQMZoMZcKxOiyJB7kZPb9I7FlvsluIonHfKk4z6-2817D3518R_9Y34nNXBwuoNV7xaATneGrINxRmFgtWDO4OOvRllNWyT4swKO5J-EFp-lvWigzjN0evJ9M7KzKZ8ojpP1VLltFj8L-5Voeey2rXlcfsWkROV6URAi8nU7xd173330CYnLte921KHB; 1P_JAR=2020-11-03-04; __Secure-3PSIDCC=AJi4QfFLaAE8IRT_9HrxqxxrmdaOmRz6pfKDwGQ0pGem79mz78KKFJzkPGeJE0azL9oFbpHlhlu8; __Secure-3PSIDCC=AJi4QfHd0SqU_m1LJFh-jZv5iaawZeeQ5Dz8gINnYM1btsdUOMVsr2b9iPAIir0RHGjkfgnH06Rv '
         }
 
         response = requests.request("GET", url, headers=headers, data=payload)

@@ -207,11 +207,11 @@ def youtube_multiple_queries(query_phrase):
                             "title": title,
                             "description": description,
                         })
-    response = {
-        "status": "success",
-        "data": all_items_detail
-    }
-    return response
+    # response = {
+    #     "status": "success",
+    #     "data": all_items_detail
+    # }
+    return all_items_detail
 
 
 # STATICS
