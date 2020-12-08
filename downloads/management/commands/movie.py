@@ -15,9 +15,10 @@ def set_sleep(seconds):
     time.sleep(seconds)
 
 
-def get_azintv_movie(movie_type: str):
+def get_azintv_movie(movie_type: str, page_number: str):
     """
 
+    :param page_number:
     :type movie_type: str
     """
     report_log = open('report_log.txt', 'a', encoding="utf-8")
@@ -25,12 +26,13 @@ def get_azintv_movie(movie_type: str):
     all_genres = get_all_genres()
     log_counter = 0
     for genre in all_genres[movie_type]:
-        imdb_ids = get_all_movie_imdb_ids(genre, film_type=movie_type)
+        imdb_ids = get_all_movie_imdb_ids(genre, film_type=movie_type, page_number=page_number)
         for imdb_id in imdb_ids:
             log_counter += 1
             set_sleep(2)
             single_movie = get_single_movie(imdb_id, film_type=movie_type)
             try:
+                print(single_movie)
                 Movie.objects.create(**{
                     'name': single_movie['name'],
                     'farsi_name': single_movie['farsi_name'],
@@ -69,7 +71,7 @@ def get_azintv_movie(movie_type: str):
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        get_azintv_movie(MoviesChoices.MOVIE)
+        get_azintv_movie(MoviesChoices.MOVIE, page_number='2')
         set_sleep(10)
         print("********* MOVIES FINISHED *********")
-        get_azintv_movie(MoviesChoices.SERIES)
+        get_azintv_movie(MoviesChoices.SERIES, page_number='2')

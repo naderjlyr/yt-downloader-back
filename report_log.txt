@@ -12,4 +12,31 @@
 2020-11-27 22:08:42.375708 _______Crawling starts_______ 
   
 2020-11-27 22:10:55.882482 _______Crawling starts_______ 
+  
+2020-12-07 17:37:14.689343 _______Crawling starts_______ 
+ 
+ Exception type : SystemExit 
+ Exception message : 
+ Stack trace : ['File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\movie.py , Line : 36, Func.Name : get_azintv_movie, Message : sys.exit()']
+ URL : {'name': 'Coffee & Kareem', 'farsi_name': '', 'description': "Twelve-year-old Kareem Manning hires a criminal to scare his mom's new boyfriend -police officer James Coffee - but it backfires, forcing Coffee and Kareem to team up in order to save themselves from Detroit's most ruthless drug kingpin.", 'genres': ['Action', 'Comedy'], 'country': 'USA', 'year': '2020', 'main_language': 'English', 'subtitles': [], 'duration': '1h 28min', 'imdb_id': '9898858', 'imdb_rate': '5.1', 'image': 'https://m.media-amazon.com/images/M/MV5BNTMyMmY0YWEtNTBkNC00NjAzLThjZjItZGFhMGYzMmU4NzE3XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_UX182_CR0,0,182,268_AL_.jpg', 'download_links': []}
+movie count: 1 
+2020-12-07 18:30:06.756300 _______Crawling starts_______ 
+  
+2020-12-07 18:30:42.917014 _______Crawling starts_______ 
+ 
+ Exception type : KeyboardInterrupt 
+ Exception message : 
+ Stack trace : ['File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\movie.py , Line : 52, Func.Name : get_azintv_movie, Message : set_sleep(2)', 'File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\movie.py , Line : 15, Func.Name : set_sleep, Message : time.sleep(seconds)']
+ URL : {'name': "Freaks: You're One of Us", 'farsi_name': '', 'description': 'Tipped by a mysterious tramp, a meek fry cook discovers she has superpowers -- and uncovers an unsavory, vast conspiracy.', 'genres': ['Action', 'Drama', 'Fantasy'], 'country': 'Germany', 'year': '2020', 'main_language': 'German', 'subtitles': [], 'duration': '1h 32min', 'imdb_id': '12875782', 'imdb_rate': '5.3', 'image': 'https://m.media-amazon.com/images/M/MV5BMjdjMDY3OGYtZTQ3ZS00NTc5LWIxOTAtYWM0YmRmYmE0NDUwXkEyXkFqcGdeQXVyNjEwNTM2Mzc@._V1_UX182_CR0,0,182,268_AL_.jpg', 'download_links': [{'title': '1080p WEB-DL / x264 VXT / 1.76 GB', 'link': 'http://dls1.mydlcenter.pw/Movies/2020/12875782/Freaks.Youre.One.of.Us.2020.1080p.WEB-DL.VXT.mp4'}, {'title': '1080p WEB-DL / HEVC x265 10bit VXT / HEVC x265 / 10bit / 1.44 GB', 'link': 'http://dls1.mydlcenter.pw/Movies/2020/12875782/Freaks.Youre.One.of.Us.2020.1080p.10bit.WEB-DL.x265.HEVC.VXT.mp4'}, {'title': '720p WEB-DL / x264 YTS / 850 MB', 'link': 'http://dls1.mydlcenter.pw/Movies/2020/12875782/Freaks.Youre.One.of.Us.2020.720p.WEB-DL.YTS.mp4'}, {'title': '480p WEB-DL / x264 RMT / 310 MB', 'link': 'http://dls1.mydlcenter.pw/Movies/2020/12875782/Freaks.Youre.One.of.Us.2020.480p.WEB-DL.RMT.mkv'}]}
+movie count: 2 
+2020-12-07 18:40:37.843681 _______Crawling starts_______ 
+ 
+ Exception type : TypeError 
+ Exception message : Educational() got an unexpected keyword argument 'url_slug'
+ Stack trace : ['File : C:\\Users\\omidb\\PycharmProjects\\downloader\\downloads\\management\\commands\\education.py , Line : 28, Func.Name : handle, Message : Educational.objects.create(**single_udemy)', 'File : C:\\Users\\omidb\\PycharmProjects\\downloader\\venv\\lib\\site-packages\\django\\db\\models\\manager.py , Line : 82, Func.Name : manager_method, Message : return getattr(self.get_queryset(), name)(*args, **kwargs)', 'File : C:\\Users\\omidb\\PycharmProjects\\downloader\\venv\\lib\\site-packages\\django\\db\\models\\query.py , Line : 431, Func.Name : create, Message : obj = self.model(**kwargs)', 'File : C:\\Users\\omidb\\PycharmProjects\\downloader\\venv\\lib\\site-packages\\django\\db\\models\\base.py , Line : 500, Func.Name : __init__, Message : raise TypeError("%s() got an unexpected keyword argument \'%s\'" % (cls.__name__, kwarg))']
+ URL UDEMY: {'name': 'Udemy – Docker Mastery: with Kubernetes +Swarm from a Docker Captain 2020-11', 'farsi_name': 'Docker Mastery دوره آموزشی پرفروش کار با داکر است که در آن به آموزش ساخت، انتشار و مدیریت Container های داکر پرداخته شده است. در این دوره یاد میگیرید چگونه کدهای ماشین را در حالی که به عنوان یک container فعالیت میکند تغییر دهید. تنها پورتهای خاصی را به برنامه ها بر روی شبکه اختصاص دهید. کلاستر سه گره ای بر روی سرورهای ابری ایجاد کنید. آی پی های مجازی بسازید و بر روی کلاستر ها تنظیم کنید. بعد از گذراندن این دوره میتوانید از داکر در فعالیتهای برنامه نویسی یا sysAdmin روزانه استفاده کنید. DockerFile بسازید و اقدام به ساخت این فایلها کنید. کلاستر های مالتی نود ساخته و از کانتینرهای H/A استفاده کنید. از کلیدهای خود محافظت کنید. از اعتبار سنجی TLS استفاده کنید و یا برای امنیت بیشتر پسورد گذاری کنید.', 'description': '', 'url_slug': 'docker-mastery-2', 'image': 'https://downloadly.ir/wp-content/uploads/2018/03/Docker-Mastery-1.jpg', 'download_links': [{'title': 'password: www.downloadly.ir دانلود بخش 1 – 3 گیگابایت', 'link': 'http://dl3.downloadly.ir/Files/Elearning/Udemy_Docker_Mastery_with_Kubernetes_Swarm_from_a_Docker_Captain_2020-11.part1_Downloadly.ir.rar'}, {'title': 'password: www.downloadly.ir دانلود بخش 2 – 3 گیگابایت', 'link': 'http://dl3.downloadly.ir/Files/Elearning/Udemy_Docker_Mastery_with_Kubernetes_Swarm_from_a_Docker_Captain_2020-11.part2_Downloadly.ir.rar'}, {'title': 'password: www.downloadly.ir دانلود بخش 3 – 3 گیگابایت', 'link': 'http://dl3.downloadly.ir/Files/Elearning/Udemy_Docker_Mastery_with_Kubernetes_Swarm_from_a_Docker_Captain_2020-11.part3_Downloadly.ir.rar'}, {'title': 'password: www.downloadly.ir دانلود بخش 4 – 3 گیگابایت', 'link': 'http://dl3.downloadly.ir/Files/Elearning/Udemy_Docker_Mastery_with_Kubernetes_Swarm_from_a_Docker_Captain_2020-11.part4_Downloadly.ir.rar'}, {'title': 'password: www.downloadly.ir دانلود بخش 5 – 2.20 گیگابایت', 'link': 'http://dl3.downloadly.ir/Files/Elearning/Udemy_Docker_Mastery_with_Kubernetes_Swarm_from_a_Docker_Captain_2020-11.part5_Downloadly.ir.rar'}], 'categories': None}
+movie count: 0 
+2020-12-07 18:41:57.268903 _______Crawling starts_______ 
+  
+2020-12-07 18:42:27.272386 _______Crawling starts_______ 
  

@@ -51,7 +51,7 @@ def get_single_udemy(url_slug, category='video-tutorials'):
     return {'name': title,
             'farsi_name': description,
             'description': '',
-            'url_slug': url_slug,
+            'url': url,
             'image': image_url,
             'download_links': download_links,
             'categories': None

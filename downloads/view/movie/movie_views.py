@@ -15,13 +15,12 @@ def get_quality(text):
         return None
 
 
-def get_download_links_series_azintv(post_id) -> list:
+def get_download_links_series_azintv(post_id: str) -> list:
     """
     :param post_id:
     :rtype: list
     """
     url = "https://azintv.xyz/wp-admin/admin-ajax.php"
-
     payload = "action=getPostLinksAjax&id=" + post_id + "&posttype=tvshow"
     headers = {
         'authority': 'azintv.xyz',
@@ -62,20 +61,43 @@ def get_download_links_series_azintv(post_id) -> list:
     return download_links
 
 
-def get_download_links_azintv(imdb_id, year):
-    url = "http://dls1.mydownloadcenter.pw/Movies/" + str(year) + "/" + str(imdb_id) + "/"
-    response_download_link = requests.request("GET", url)
-    soup_download_links = BeautifulSoup(response_download_link.text, 'html.parser')
-    download_links = soup_download_links.find_all('a')[1:]
-    download_links = [{
-        "title": download_link['href'],
-        "link": [url + download_link['href']],
-        "subtitle": '',
-        "quality": get_quality(download_link['href']),
+import requests
 
-    } for download_link in
-        download_links]
-    return download_links
+
+def get_download_links_azintv(post_id: str) -> list:
+    """
+    :param post_id:
+    :rtype: list
+    """
+    url = "https://azintv.pw/wp-admin/admin-ajax.php"
+    payload = "action=getPostLinksAjax&id=" + post_id + "&posttype=movie"
+    headers = {
+        'authority': 'azintv.xyz',
+        'pragma': 'no-cache',
+        'cache-control': 'no-cache',
+        'accept': '*/*',
+        'x-requested-with': 'XMLHttpRequest',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/86.0.4240.198 Safari/537.36',
+        'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+        'origin': 'https://azintv.xyz',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://azintv.xyz/tvshow/series-5296406/',
+        'accept-language': 'en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7',
+        'cookie': '_ga=GA1.1.1932757469.1605702498; _ga_QZ7VPPQ3VY=GS1.1.1605971522.10.1.1605971908.0'
+    }
+
+    response_download_link = requests.request("POST", url, headers=headers, data=payload)
+
+    soup_download_links = BeautifulSoup(response_download_link.text, 'html.parser')
+    series_links = [
+        {'title': ' / '.join([span_text.text for span_text in movie_element.find_all('span')]),
+         'link': movie_element.find('a')['href']}
+        for movie_element in soup_download_links.find_all('div')
+    ]
+    return series_links
 
 
 def clean_text(text):
@@ -172,7 +194,7 @@ def get_single_movie(imdb_id, film_type=MoviesChoices.MOVIE):
     subtitles = subtitle_almas_download(str(poster_url.split('/')[-2]), year)
     download_urls = []
     if film_type == MoviesChoices.MOVIE:
-        download_urls = get_download_links_azintv(imdb_id, year=year)
+        download_urls = get_download_links_azintv(post_id)
     elif film_type == MoviesChoices.SERIES:
         download_urls = get_download_links_series_azintv(post_id)
     details = soup_detail.find('div', class_='detail')
