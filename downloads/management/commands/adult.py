@@ -25,6 +25,7 @@ class Command(BaseCommand):
             for movie_id in all_ids:
                 ujz_single_movie = get_single_movie_ujz(movie_id)
                 try:
+                    print(ujz_single_movie)
                     Adult.objects.create(**{'name': ujz_single_movie['name'],
                                             'farsi_name': ujz_single_movie['farsi_name'],
                                             'description': ujz_single_movie['description'],

@@ -53,13 +53,13 @@ class Movie(models.Model):
 
 
 class Music(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True)
-    artist = models.CharField(max_length=100, null=True, blank=True)
+    name = models.CharField(max_length=400, null=True, blank=True)
+    artist = models.CharField(max_length=300, null=True, blank=True)
     genre = models.CharField(max_length=100, null=True, blank=True)
     duration = models.CharField(max_length=40, null=True, blank=True)
     url = models.CharField(max_length=300, null=True, blank=True)
     download_link = models.CharField(max_length=300, null=True, blank=True)
-    image = models.CharField(max_length=100, null=True, blank=True)
+    image = models.CharField(max_length=300, null=True, blank=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=500, null=True, blank=True)
