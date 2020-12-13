@@ -1,10 +1,8 @@
-import requests
 from django.db import models
-from django.http import HttpResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from downloads.models import Movie, Adult, Educational
+from downloads.models import Movie, Adult, Educational, Music
 from downloads.view.youtube.youtube_functions import get_single_detail, youtube_multiple_queries
 
 
@@ -20,6 +18,7 @@ class SearchPost(viewsets.ViewSet):
                 'adult',
                 'youtube',
                 'educational',
+                'music',
             ]
         all_search = []
         if 'movie' in filtering_type:
@@ -41,6 +40,16 @@ class SearchPost(viewsets.ViewSet):
             educational_query = Educational.objects.filter(
                 models.Q(name__icontains=search_query) | models.Q(description__icontains=search_query) | models.Q(
                     farsi_name__icontains=search_query))
+            educational_data = educational_query.values()
+            educational = {'type': 'educational', 'data': educational_data}
+            all_search.append(educational)
+        if 'music' in filtering_type:
+            educational_query = Music.objects.filter(
+                models.Q(name__icontains=search_query) |
+                models.Q(description__icontains=search_query) |
+                models.Q(artist__icontains=search_query) |
+                models.Q(genre__icontains=search_query)
+            )
             educational_data = educational_query.values()
             educational = {'type': 'educational', 'data': educational_data}
             all_search.append(educational)
