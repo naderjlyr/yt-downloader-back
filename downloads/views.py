@@ -45,12 +45,12 @@ class SearchPost(viewsets.ViewSet):
             educational = {'type': 'educational', 'data': educational_data[:20]}
             all_search.append(educational)
         if 'music' in filtering_type:
-            music_query = Music.objects.all()
-            #     models.Q(name__icontains=search_query) |
-            #     models.Q(description__icontains=search_query) |
-            #     models.Q(artist__icontains=search_query) |
-            #     models.Q(genre__icontains=search_query)
-            # )
+            music_query = Music.objects.filter(
+                models.Q(name__icontains=search_query) |
+                models.Q(description__icontains=search_query) |
+                models.Q(artist__icontains=search_query) |
+                models.Q(genre__icontains=search_query)
+            )
             music_data = music_query.values()
             if len(music_data) == 0:
                 music_data = store_musics(search_query)
