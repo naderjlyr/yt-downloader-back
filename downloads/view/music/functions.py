@@ -33,7 +33,7 @@ def d(t):
     return e
 
 
-def get_album_music_titles(url):
+def get_album_music_titles(url) -> list:
     headers = album_music_headers
     response = requests.request("GET", url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
