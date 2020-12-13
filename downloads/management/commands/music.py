@@ -26,10 +26,13 @@ class Command(BaseCommand):
                     print("broken")
                     break
                 for music_title in all_music_titles:
-                    musics_detail = search_music(music_title, 1)
-                    for music_detail in musics_detail:
-                        print(music_detail)
-                        a = Music.objects.create(**music_detail, genre=ALL_GENRES[genre_name])
-                        print(a)
+                    store_musics(ALL_GENRES[genre_name], music_title)
         report_log.write("\n" + "music count: " + str(log_counter))
         report_log.close()
+
+
+def store_musics(music_title, genre_name=None, page_number=1):
+    musics_detail = search_music(music_title, page_number=page_number)
+    for music_detail in musics_detail:
+        Music.objects.create(**music_detail, genre=genre_name)
+    return musics_detail

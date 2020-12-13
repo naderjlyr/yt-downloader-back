@@ -14,7 +14,9 @@ def search_music(query_string: str, page_number: int = 1):
         try:
             for song_details in songs_details['response']:
                 if isinstance(song_details, dict):
-                    video_id = d(song_details['owner_id']) + ":" + d(song_details['id'])
+                    owner_id_ = song_details['owner_id']
+                    details_id_ = song_details['id']
+                    video_id = d(owner_id_) + ":" + d(details_id_)
                     download_link = "https://free.mp3-download.best/" + video_id
                     single_url = "https://freemp3downloads.cc/api/get_song.php?id=" + video_id
                     all_musics.append({
@@ -29,3 +31,6 @@ def search_music(query_string: str, page_number: int = 1):
         except:
             print(songs_details)
     return all_musics
+
+
+print(search_music('a'))

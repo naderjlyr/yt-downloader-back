@@ -2,6 +2,7 @@ from django.db import models
 from rest_framework import viewsets
 from rest_framework.response import Response
 
+from downloads.management.commands.music import store_musics
 from downloads.models import Movie, Adult, Educational, Music
 from downloads.view.youtube.youtube_functions import get_single_detail, youtube_multiple_queries
 
@@ -27,32 +28,34 @@ class SearchPost(viewsets.ViewSet):
                     farsi_name__icontains=search_query) |
                 models.Q(genres__icontains=['Action']))
             movies_data = movies_query.values()
-            movies = {'type': 'movie', 'data': movies_data[:10]}
+            movies = {'type': 'movie', 'data': movies_data[:20]}
             all_search.append(movies)
         if 'adult' in filtering_type:
             adult_query = Adult.objects.filter(
                 models.Q(name__icontains=search_query) | models.Q(description__icontains=search_query) | models.Q(
                     farsi_name__icontains=search_query))
             adult_data = adult_query.values()
-            adults = {'type': 'adult', 'data': adult_data}
+            adults = {'type': 'adult', 'data': adult_data[:20]}
             all_search.append(adults)
         if 'educational' in filtering_type:
             educational_query = Educational.objects.filter(
                 models.Q(name__icontains=search_query) | models.Q(description__icontains=search_query) | models.Q(
                     farsi_name__icontains=search_query))
             educational_data = educational_query.values()
-            educational = {'type': 'educational', 'data': educational_data}
+            educational = {'type': 'educational', 'data': educational_data[:20]}
             all_search.append(educational)
         if 'music' in filtering_type:
-            educational_query = Music.objects.filter(
-                models.Q(name__icontains=search_query) |
-                models.Q(description__icontains=search_query) |
-                models.Q(artist__icontains=search_query) |
-                models.Q(genre__icontains=search_query)
-            )
-            educational_data = educational_query.values()
-            educational = {'type': 'educational', 'data': educational_data}
-            all_search.append(educational)
+            music_query = Music.objects.all()
+            #     models.Q(name__icontains=search_query) |
+            #     models.Q(description__icontains=search_query) |
+            #     models.Q(artist__icontains=search_query) |
+            #     models.Q(genre__icontains=search_query)
+            # )
+            music_data = music_query.values()
+            if len(music_data) == 0:
+                music_data = store_musics(search_query)
+            music = {'type': 'music', 'data': music_data[:20]}
+            all_search.append(music)
         if 'youtube' in filtering_type:
             if search_query.startswith("www.youtube.com"):
                 search_query = "https://" + search_query
