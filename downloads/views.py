@@ -24,16 +24,21 @@ class SearchPost(viewsets.ViewSet):
         all_search = []
         if 'movie' in filtering_type:
             movies_query = Movie.objects.filter(
-                models.Q(name__icontains=search_query) | models.Q(description__icontains=search_query) | models.Q(
-                    farsi_name__icontains=search_query) |
-                models.Q(genres__icontains=['Action']))
+                models.Q(name__icontains=search_query) |
+                models.Q(description__icontains=search_query) |
+                models.Q(farsi_name__icontains=search_query) |
+                models.Q(genres__icontains=[search_query])
+            )
             movies_data = movies_query.values()
             movies = {'type': 'movie', 'data': movies_data[:20]}
             all_search.append(movies)
         if 'adult' in filtering_type:
             adult_query = Adult.objects.filter(
-                models.Q(name__icontains=search_query) | models.Q(description__icontains=search_query) | models.Q(
-                    farsi_name__icontains=search_query))
+                models.Q(name__icontains=search_query) |
+                models.Q(description__icontains=search_query) |
+                models.Q(farsi_name__icontains=search_query) |
+                models.Q(tags__icontains=[search_query])
+            )
             adult_data = adult_query.values()
             adults = {'type': 'adult', 'data': adult_data[:20]}
             all_search.append(adults)
