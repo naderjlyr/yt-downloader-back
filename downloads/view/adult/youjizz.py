@@ -29,6 +29,15 @@ def get_single_movie_ujz(movie_id):
     driver.close()
     # parse the HTML
     soup = BeautifulSoup(page_source, "html.parser")
+    tags = soup.find('meta', {'name': 'keywords'})['content'].split(' , ')
+    description = soup.find('meta', {'name': 'description'})['content']
+    try:
+        video_favorite = soup.find("input", {'id': "checkVideoFavorite"})
+        views = video_favorite['data-views']
+        rating = video_favorite['data-rating']
+    except:
+        views = 0
+        rating = 0
     scripts = soup.find_all("script")
     image_url = "http:" + soup.find('meta', {'property': 'og:image'})['content']
     for script in scripts:
@@ -46,15 +55,18 @@ def get_single_movie_ujz(movie_id):
             ]
             return {'name': soup.find('title').text,
                     'farsi_name': '+18 کوس کوص کون کیر سکس سکسی پورن سوپر جنده لزبین ',
-                    'description': '',
+                    'description': description,
+                    'views': views,
+                    'rating': rating,
                     'movie_id': movie_id,
-                    'genres': None,  # type of this field is Array
+                    'tags': tags,  # type of this field is Array
                     'image': image_url,
                     'download_links': download_links
                     }
 
-    # if __name__ == '__main__':
-    # for page_number in range(1, 100):
-    #     all_ids = get_all_ids_ujz(page_number=str(page_number))
-    #     for movie_id in all_ids:
-    #         print(get_single_movie_ujz(movie_id))
+# if __name__ == '__main__':
+#     for page_number in range(1, 100):
+#         all_ids = get_all_ids_ujz(page_number=str(page_number))
+#         print(all_ids)
+#         for movie_id in all_ids:
+#             print(get_single_movie_ujz(movie_id))
