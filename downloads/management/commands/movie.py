@@ -21,8 +21,6 @@ def get_azintv_movie(movie_type: str, page_number: str):
     :param page_number:
     :type movie_type: str
     """
-    report_log = open('report_log.txt', 'a', encoding="utf-8")
-    report_log.write(" \n" + str(datetime.datetime.now()) + " _______Crawling starts_______ \n ")
     all_genres = get_all_genres()
     log_counter = 0
     for genre in all_genres[movie_type]:
@@ -32,7 +30,6 @@ def get_azintv_movie(movie_type: str, page_number: str):
             set_sleep(2)
             single_movie = get_single_movie(imdb_id, film_type=movie_type)
             try:
-                print(single_movie)
                 Movie.objects.create(**{
                     'name': single_movie['name'],
                     'farsi_name': single_movie['farsi_name'],
@@ -58,14 +55,13 @@ def get_azintv_movie(movie_type: str, page_number: str):
                     stack_trace.append(
                         "File : %s , Line : %d, Func.Name : %s, Message : %s" % (
                             trace[0], trace[1], trace[2], trace[3]))
+                report_log = open('error_log.txt', 'a', encoding="utf-8")
                 report_log.write("\n Exception type : %s " % ex_type.__name__)
                 report_log.write("\n Exception message : %s" % ex_value)
                 report_log.write("\n Stack trace : %s" % stack_trace)
                 report_log.write("\n URL : %s" % single_movie)
                 report_log.write("\n" + "movie count: " + str(log_counter))
                 report_log.close()
-    report_log.write("\n" + movie_type + " count: " + str(log_counter))
-    report_log.close()
 
 
 class Command(BaseCommand):

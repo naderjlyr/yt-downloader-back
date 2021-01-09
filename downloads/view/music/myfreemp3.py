@@ -3,9 +3,9 @@ import requests
 from downloads.view.music.functions import d, myfreemp3_header
 
 
-def search_music(query_string: str, page_number: int = 1):
+def search_music(query_string: str, page_number: int = 0):
     url = "https://myfreemp3.vip/api/search.php?callback=jQuery21307991881983452356_1607376745847"
-    payload = "q=" + query_string + "&page=" + str(page_number) + "&sort=1"
+    payload = "q=" + query_string + "&page=" + str(page_number)
     headers = myfreemp3_header
     response = requests.request("POST", url, headers=headers, data=payload.encode('utf-8'))
     songs_details = json.loads('('.join(response.text[:-2].split("(")[1:]))
@@ -31,6 +31,3 @@ def search_music(query_string: str, page_number: int = 1):
         except:
             print(songs_details)
     return all_musics
-
-
-print(search_music('a'))

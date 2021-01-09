@@ -4,6 +4,8 @@ import youtube_dlc as youtube_dl
 import os
 import requests
 import json
+
+from bs4 import BeautifulSoup
 from django.conf import settings
 
 
@@ -63,8 +65,9 @@ def get_single_detail(video_url):
                   '__Secure-3PSIDCC=AJi4QfEooiQA0lV8jhfq3v3QLKi9bwuyrjzOtA_vcGoq_rGXxihN2t1knXcfFNllG0QPj-E03w '
     }
 
-    response = requests.request("GET", video_url, headers=headers, data=payload)
+    video_url += "&pbj=1"
 
+    response = requests.request("GET", video_url, headers=headers, data=payload)
     video_details = json.loads(response.text)[2]['playerResponse']['videoDetails']
     return {"video_id": video_details['videoId'], "url": "https://www.youtube.com/watch?v=" + video_details['videoId'],
             "title": video_details['title'],
@@ -188,7 +191,10 @@ def youtube_multiple_queries(query_phrase):
                         video_duration = item_content['lengthText']['simpleText']
                     view_count_text = ""
                     if "viewCountText" in item_content.keys():
-                        view_count_text = item_content['viewCountText']['simpleText']
+                        if 'simpleText' in item_content['viewCountText'].keys():
+                            view_count_text = item_content['viewCountText']['simpleText']
+                        else:
+                            view_count_text = item_content['viewCountText']['runs'][0]['text']
                     owner_text = item_content['ownerText']['runs'][0]['text']
                     description = ""
                     if "descriptionSnippet" in item_content.keys():

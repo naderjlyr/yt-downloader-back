@@ -31,8 +31,9 @@ class Command(BaseCommand):
         report_log.close()
 
 
-def store_musics(music_title, genre_name=None, page_number=1):
+def store_musics(music_title, genre_name=None, page_number=0):
     musics_detail = search_music(music_title, page_number=page_number)
-    for music_detail in musics_detail:
-        Music.objects.create(**music_detail, genre=genre_name)
+
+    # for music_detail in musics_detail:
+    #     Music.objects.create(**music_detail, genre=genre_name)
     return musics_detail

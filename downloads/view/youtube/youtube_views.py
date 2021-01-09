@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 import json
+import sys
+
 from rest_framework import viewsets, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -24,7 +26,9 @@ class DownloadVideo(viewsets.ViewSet):
             file_path = get_mp3(video_link)
             response = {"status": "success", "code": status.HTTP_200_OK,
                         "data": {
-                            "formats": {"mp3": [{"format": "audio", "extension": "mp3", "url": str(file_path[0]),
+                            "formats": {"mp3": [{"format": "audio", "extension": "mp3", "url":
+                                "http://" + request.META['REMOTE_ADDR'] + ":" + request.META['SERVER_PORT'] + str(
+                                    file_path[0]),
                                                  "title": str(file_path[1])}]}}, "message": []}
 
             return Response(response, status=status.HTTP_200_OK)
