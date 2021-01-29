@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField, ArrayField
+from django.db.models import JSONField
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 
 from downloads.choices import MoviesChoices
