@@ -27,7 +27,7 @@ def get_azintv_movie(movie_type: str, page_number: str):
         imdb_ids = get_all_movie_imdb_ids(genre, film_type=movie_type, page_number=page_number)
         for imdb_id in imdb_ids:
             log_counter += 1
-            set_sleep(2)
+            set_sleep(5)
             single_movie = get_single_movie(imdb_id, film_type=movie_type)
             try:
                 Movie.objects.create(**{
@@ -60,14 +60,17 @@ def get_azintv_movie(movie_type: str, page_number: str):
                 report_log.write("\n Exception message : %s" % ex_value)
                 report_log.write("\n Stack trace : %s" % stack_trace)
                 report_log.write("\n URL : %s" % single_movie)
-                report_log.write("\n" + "movie count: " + str(log_counter))
+                report_log.write("\n" + movie_type + " movie count: " + str(log_counter))
                 report_log.close()
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        get_azintv_movie(MoviesChoices.MOVIE, page_number='2')
-        set_sleep(10)
+        for p_n in range(1, 100):
+            get_azintv_movie(MoviesChoices.MOVIE, page_number=str(p_n))
+            set_sleep(10)
         print("********* MOVIES FINISHED *********")
-        get_azintv_movie(MoviesChoices.SERIES, page_number='2')
+        for p_n in range(1, 100):
+            get_azintv_movie(MoviesChoices.SERIES, page_number=str(p_n))
+            set_sleep(10)

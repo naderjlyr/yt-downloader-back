@@ -21,10 +21,9 @@ class Command(BaseCommand):
         report_log = open('report_log.txt', 'a', encoding="utf-8")
         report_log.write(" \n" + str(datetime.datetime.now()) + " _______Crawling starts_______ \n ")
         log_counter = 0
-        for page_number in range(1, 100):
+        for page_number in range(1, 150):
             for url_slug in get_all_udemy_links(page_number=page_number):
                 single_udemy = get_single_udemy(url_slug)
-                print(single_udemy)
                 try:
                     Educational.objects.create(**single_udemy)
                     log_counter += 1
@@ -40,7 +39,7 @@ class Command(BaseCommand):
                     report_log.write("\n Exception message : %s" % ex_value)
                     report_log.write("\n Stack trace : %s" % stack_trace)
                     report_log.write("\n URL UDEMY: %s" % single_udemy)
-                    report_log.write("\n" + "movie count: " + str(log_counter))
+                    report_log.write("\n" + "udemy count: " + str(log_counter))
                     report_log.close()
         report_log.write("\n" + "movie count: " + str(log_counter))
         report_log.close()

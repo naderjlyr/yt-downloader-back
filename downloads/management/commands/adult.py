@@ -20,7 +20,8 @@ class Command(BaseCommand):
         report_log = open('report_log.txt', 'a', encoding="utf-8")
         report_log.write(" \n" + str(datetime.datetime.now()) + " _______Crawling starts_______ \n ")
         log_counter = 0
-        for page_number in range(1, 100):
+        for page_number in range(1, 1000):
+            set_sleep(5)
             all_ids = get_all_ids_ujz(page_number=str(page_number))
             for movie_id in all_ids:
                 ujz_single_movie = get_single_movie_ujz(movie_id)
@@ -38,6 +39,8 @@ class Command(BaseCommand):
 
                                          )
                     log_counter += 1
+
+
                 except BaseException as _:
                     ex_type, ex_value, ex_traceback = sys.exc_info()
                     trace_back = traceback.extract_tb(ex_traceback)
@@ -52,5 +55,6 @@ class Command(BaseCommand):
                     report_log.write("\n URL ADULT : %s" % ujz_single_movie)
                     report_log.write("\n" + "movie count: " + str(log_counter))
                     report_log.close()
-        report_log.write("\n" + "movie count: " + str(log_counter))
+        print("adult content", str(log_counter))
+        report_log.write("\n" + "adult count: " + str(log_counter))
         report_log.close()
