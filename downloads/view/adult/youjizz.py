@@ -22,7 +22,9 @@ def get_single_movie_ujz(movie_id):
     url = "https://www.youjizz.com/videos/-" + str(movie_id) + ".html "
     chrome_options = Options()
     chrome_options.add_argument('--headless')
-    driver = webdriver.Chrome(options=chrome_options)
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
     driver.get(url)
     # get the page source
     page_source = driver.page_source
