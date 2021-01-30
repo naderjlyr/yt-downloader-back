@@ -45,11 +45,8 @@ def get_single_movie_ujz(movie_id):
     for script in scripts:
         if str(script).__contains__('var dataEncodings'):
             script = str(script)
-            data_encodings = script.split(';')[0]
-            print(script)
-            print(data_encodings)
+            data_encodings = script.split('}];')[0]
             data_encodings_str = data_encodings.split('dataEncodings =')[1]
-            print(data_encodings_str)
             all_movie_data = list(eval(data_encodings_str))
             download_links = [
                 {'title': movie_data['name'],
