@@ -15,7 +15,7 @@ def set_sleep(seconds):
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        log_counter = 0
+        Adult.objects.all().delete()
         for page_number in range(1, 1000):
             set_sleep(5)
             all_ids = get_all_ids_ujz(page_number=str(page_number))
@@ -35,7 +35,6 @@ class Command(BaseCommand):
                                             }
 
                                          )
-                    log_counter += 1
 
 
                 except BaseException as _:
@@ -50,5 +49,3 @@ class Command(BaseCommand):
                     print("\n Exception message : %s" % ex_value)
                     print("\n Stack trace : %s" % stack_trace)
                     print("\n URL ADULT : %s" % ujz_single_movie)
-                    print("\n" + "movie count: " + str(log_counter))
-        print("adult content", str(log_counter))
