@@ -20,7 +20,7 @@ def get_download_links_series_azintv(post_id: str) -> list:
     :param post_id:
     :rtype: list
     """
-    url = "https://azintv.xyz/wp-admin/admin-ajax.php"
+    url = "https://azintv2.pw/wp-admin/admin-ajax.php"
     payload = "action=getPostLinksAjax&id=" + post_id + "&posttype=tvshow"
     headers = {
         'authority': 'azintv.xyz',
@@ -31,11 +31,11 @@ def get_download_links_series_azintv(post_id: str) -> list:
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/86.0.4240.198 Safari/537.36',
         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'origin': 'https://azintv.xyz',
+        'origin': 'https://azintv2.pw',
         'sec-fetch-site': 'same-origin',
         'sec-fetch-mode': 'cors',
         'sec-fetch-dest': 'empty',
-        'referer': 'https://azintv.xyz/tvshow/series-5296406/',
+        'referer': 'https://azintv2.pw/tvshow/series-5296406/',
         'accept-language': 'en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7',
         'cookie': '_ga=GA1.1.1932757469.1605702498; _ga_QZ7VPPQ3VY=GS1.1.1605971522.10.1.1605971908.0'
     }
@@ -80,11 +80,11 @@ def get_download_links_azintv(post_id: str) -> list:
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/86.0.4240.198 Safari/537.36',
         'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'origin': 'https://azintv.xyz',
+        'origin': 'https://azintv2.pw',
         'sec-fetch-site': 'same-origin',
         'sec-fetch-mode': 'cors',
         'sec-fetch-dest': 'empty',
-        'referer': 'https://azintv.xyz/tvshow/series-5296406/',
+        'referer': 'https://azintv2.pw/tvshow/series-5296406/',
         'accept-language': 'en-US,en;q=0.9,tr-TR;q=0.8,tr;q=0.7',
         'cookie': '_ga=GA1.1.1932757469.1605702498; _ga_QZ7VPPQ3VY=GS1.1.1605971522.10.1.1605971908.0'
     }
@@ -112,14 +112,14 @@ def subtitle_almas_download(imdb_id, year, film_type=MoviesChoices.MOVIE):
         _film_type = 'Series'
 
     # download from almassub.pw
-    url = "http://subtitle.mydownloadcenter.pw/AS/Movies/" + str(year) + "/" + str(imdb_id)
+    url = "http://subtitle.mkservers.ir/AS/Movies/" + str(year) + "/" + str(imdb_id)
 
     response = requests.request("GET", url)
     response = response.text.encode('utf8').decode()
     soup = BeautifulSoup(response, 'lxml')
     a_tags = soup.find_all('a')
     if len(a_tags) > 0:
-        links = [{a_tag['href'].split('.')[0]: 'http://subtitle.mydownloadcenter.pw/AS/'
+        links = [{a_tag['href'].split('.')[0]: 'http://subtitle.mkservers.ir/AS/'
                                                + film_type + '/' + str(year) +
                                                '/' + str(imdb_id) + "/" +
                                                a_tag['href']} for a_tag in a_tags[1:]]
@@ -131,7 +131,7 @@ def get_all_genres() -> Dict[str, list]:
     """
     :rtype: list
     """
-    url = "https://azintv.xyz/"
+    url = "https://azintv2.pw/"
 
     response = requests.request("GET", url)
     response = response.text.encode('utf8').decode()
@@ -155,9 +155,9 @@ def get_all_movie_imdb_ids(movie_genre: str, page_number: str = '2', film_type: 
     :return:
     :rtype: object
     """
-    url = "https://azintv.xyz/genre/" + movie_genre + "/page/" + str(page_number)
+    url = "https://azintv2.pw/genre/" + movie_genre + "/page/" + str(page_number)
     if film_type == MoviesChoices.SERIES:
-        url = "https://azintv.xyz/tvshow-genre/" + movie_genre + "/page/" + str(page_number)
+        url = "https://azintv2.pw/tvshow-genre/" + movie_genre + "/page/" + str(page_number)
     response = requests.request("GET", url)
     soup = BeautifulSoup(response.text, 'html.parser')
     posters = soup.find_all('div', class_='poster')
@@ -173,9 +173,9 @@ def get_single_movie(imdb_id, film_type=MoviesChoices.MOVIE):
     :param film_type: series, movie
     :return:
     """
-    poster_url = 'https://azintv.xyz/movie/' + imdb_id
+    poster_url = 'https://azintv2.pw/movie/' + imdb_id
     if film_type == MoviesChoices.SERIES:
-        poster_url = 'https://azintv.xyz/tvshow/series-' + imdb_id
+        poster_url = 'https://azintv2.pw/tvshow/series-' + imdb_id
     response = requests.request("GET", poster_url)
     soup_detail = BeautifulSoup(response.text, 'html.parser')
     post_id = soup_detail.find('div', class_='downloadlinks text-center')['id']

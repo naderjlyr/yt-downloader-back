@@ -66,3 +66,11 @@ class Music(models.Model):
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=500, null=True, blank=True)
+
+
+class Configs(models.Model):
+    search_name = models.CharField(max_length=500, blank=True, null=True)
+    search_type = models.CharField(max_length=50, blank=True, null=True)
+    result_count = models.IntegerField(default=0)
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(default=timezone.now)

@@ -29,6 +29,7 @@ class Command(BaseCommand):
                     Adult.objects.create(**{'name': ujz_single_movie['name'],
                                             'farsi_name': ujz_single_movie['farsi_name'],
                                             'description': ujz_single_movie['description'],
+                                            'url': ujz_single_movie['url'],
                                             'views': ujz_single_movie['views'],
                                             'rating': ujz_single_movie['rating'],
                                             'movie_id': ujz_single_movie['movie_id'],

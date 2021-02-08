@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from downloads.management.commands.music import store_musics
-from downloads.models import Movie, Adult, Educational, Music
+from downloads.models import Movie, Adult, Educational, Music, Configs
 from downloads.view.youtube.youtube_functions import get_single_detail, youtube_multiple_queries
 
 
@@ -75,6 +75,11 @@ class SearchPost(viewsets.ViewSet):
                 youtube_data = youtube_multiple_queries(search_query)
             youtube = {'type': 'youtube', 'data': youtube_data}
             all_search.append(youtube)
+        Configs.objects.create(
+            search_name=search_query,
+            search_type=filtering_type,
+            result_count=len(all_search[0]['data']),
+        )
         return Response({'status': 'success', 'code': 200, 'data': all_search, 'message': ''})
 
 

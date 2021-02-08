@@ -59,6 +59,7 @@ def get_single_movie_ujz(movie_id):
                     'farsi_name': '+18 کوس کوص کون کیر سکس سکسی پورن سوپر جنده لزبین ',
                     'description': description,
                     'views': views,
+                    'url': url,
                     'rating': rating,
                     'movie_id': movie_id,
                     'tags': tags,  # type of this field is Array

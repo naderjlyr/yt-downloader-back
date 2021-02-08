@@ -17,7 +17,7 @@ def search_music(query_string: str, page_number: int = 0):
                     owner_id_ = song_details['owner_id']
                     details_id_ = song_details['id']
                     video_id = d(owner_id_) + ":" + d(details_id_)
-                    download_link = "https://free.mp3-download.best/" + video_id
+                    download_link = "https://speed.idmp3s.com/" + video_id
                     single_url = "https://freemp3downloads.cc/api/get_song.php?id=" + video_id
                     all_musics.append({
                         "name": song_details['title'],

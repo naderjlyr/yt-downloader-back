@@ -25,6 +25,7 @@ class Command(BaseCommand):
             for url_slug in get_all_udemy_links(page_number=page_number):
                 single_udemy = get_single_udemy(url_slug)
                 try:
+                    print(single_udemy)
                     Educational.objects.create(**single_udemy)
                     log_counter += 1
                 except BaseException as _:
