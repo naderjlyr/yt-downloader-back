@@ -2,8 +2,8 @@ from django.db import models
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-from downloads.management.commands.music import store_musics
 from downloads.models import Movie, Adult, Educational, Music, Configs
+from downloads.view.music.myfreemp3 import search_music
 from downloads.view.youtube.youtube_functions import get_single_detail, youtube_multiple_queries
 
 
@@ -50,7 +50,7 @@ class SearchPost(viewsets.ViewSet):
             educational = {'type': 'educational', 'data': educational_data[:20]}
             all_search.append(educational)
         if 'music' in filtering_type:
-            music_data = store_musics(search_query)
+            music_data = search_music(search_query)
             music = {'type': 'music', 'data': music_data[:20]}
             all_search.append(music)
         if 'youtube' in filtering_type:

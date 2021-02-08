@@ -1,4 +1,3 @@
-import datetime
 import sys
 import traceback
 
@@ -10,15 +9,12 @@ from downloads.view.adult.youjizz import get_all_ids_ujz, get_single_movie_ujz
 
 
 def set_sleep(seconds):
-    # return None
     time.sleep(seconds)
 
 
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
-        report_log = open('report_log.txt', 'a', encoding="utf-8")
-        report_log.write(" \n" + str(datetime.datetime.now()) + " _______Crawling starts_______ \n ")
         log_counter = 0
         for page_number in range(1, 1000):
             set_sleep(5)
@@ -50,12 +46,9 @@ class Command(BaseCommand):
                         stack_trace.append(
                             "File : %s , Line : %d, Func.Name : %s, Message : %s" % (
                                 trace[0], trace[1], trace[2], trace[3]))
-                    report_log.write("\n Exception type : %s " % ex_type.__name__)
-                    report_log.write("\n Exception message : %s" % ex_value)
-                    report_log.write("\n Stack trace : %s" % stack_trace)
-                    report_log.write("\n URL ADULT : %s" % ujz_single_movie)
-                    report_log.write("\n" + "movie count: " + str(log_counter))
-                    report_log.close()
+                    print("\n Exception type : %s " % ex_type.__name__)
+                    print("\n Exception message : %s" % ex_value)
+                    print("\n Stack trace : %s" % stack_trace)
+                    print("\n URL ADULT : %s" % ujz_single_movie)
+                    print("\n" + "movie count: " + str(log_counter))
         print("adult content", str(log_counter))
-        report_log.write("\n" + "adult count: " + str(log_counter))
-        report_log.close()

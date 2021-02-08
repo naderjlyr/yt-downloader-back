@@ -1,4 +1,3 @@
-import datetime
 import sys
 import traceback
 
@@ -11,7 +10,6 @@ from downloads.view.movie.movie_views import get_all_genres, get_all_movie_imdb_
 
 
 def set_sleep(seconds):
-    # return None
     time.sleep(seconds)
 
 
@@ -55,13 +53,11 @@ def get_azintv_movie(movie_type: str, page_number: str):
                     stack_trace.append(
                         "File : %s , Line : %d, Func.Name : %s, Message : %s" % (
                             trace[0], trace[1], trace[2], trace[3]))
-                report_log = open('error_log.txt', 'a', encoding="utf-8")
-                report_log.write("\n Exception type : %s " % ex_type.__name__)
-                report_log.write("\n Exception message : %s" % ex_value)
-                report_log.write("\n Stack trace : %s" % stack_trace)
-                report_log.write("\n URL : %s" % single_movie)
-                report_log.write("\n" + movie_type + " movie count: " + str(log_counter))
-                report_log.close()
+                print("\n Exception type : %s " % ex_type.__name__)
+                print("\n Exception message : %s" % ex_value)
+                print("\n Stack trace : %s" % stack_trace)
+                print("\n URL : %s" % single_movie)
+                print("\n" + movie_type + " movie count: " + str(log_counter))
 
 
 class Command(BaseCommand):
