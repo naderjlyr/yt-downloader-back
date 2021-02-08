@@ -28,22 +28,26 @@ def get_azintv_movie(movie_type: str, page_number: str):
             set_sleep(5)
             single_movie = get_single_movie(imdb_id, film_type=movie_type)
             try:
-                Movie.objects.create(**{
-                    'name': single_movie['name'],
-                    'farsi_name': single_movie['farsi_name'],
-                    'description': single_movie['description'],
-                    'movie_id': single_movie['imdb_id'],
-                    'genres': single_movie['genres'],
-                    'image': single_movie['image'],
-                    'download_links': single_movie['download_links'],
-                    'country': single_movie['country'],
-                    'year': single_movie['year'],
-                    'movie_type': movie_type,
-                    'main_language': single_movie['main_language'],
-                    'subtitles': single_movie['subtitles'],
-                    'duration': single_movie['duration'],
-                    'imdb_rate': single_movie['imdb_rate']
-                })
+                existing_movie = Movie.objects.filter(movie_id=single_movie['imdb_id'])
+                if existing_movie.count() > 0:
+                    existing_movie.update(download_links=single_movie['download_links'])
+                else:
+                    Movie.objects.create(**{
+                        'name': single_movie['name'],
+                        'farsi_name': single_movie['farsi_name'],
+                        'description': single_movie['description'],
+                        'movie_id': single_movie['imdb_id'],
+                        'genres': single_movie['genres'],
+                        'image': single_movie['image'],
+                        'download_links': single_movie['download_links'],
+                        'country': single_movie['country'],
+                        'year': single_movie['year'],
+                        'movie_type': movie_type,
+                        'main_language': single_movie['main_language'],
+                        'subtitles': single_movie['subtitles'],
+                        'duration': single_movie['duration'],
+                        'imdb_rate': single_movie['imdb_rate']
+                    })
                 set_sleep(2)
             except BaseException as _:
                 ex_type, ex_value, ex_traceback = sys.exc_info()
