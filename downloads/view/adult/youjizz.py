@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
@@ -46,15 +48,17 @@ def get_single_movie_ujz(movie_id):
         if str(script).__contains__('var dataEncodings'):
             script = str(script)
             data_encodings = script.split('}];')[0]
-            data_encodings_str = data_encodings.split('dataEncodings =')[1] + "}]"
-            all_movie_data = list(eval(data_encodings_str))
-            download_links = [
-                {'title': movie_data['name'],
-                 'link': ["https:" + movie_data['filename'].replace('\\', '')],
-                 'subtitle': '',
-                 'quality': movie_data['quality']}
-                for movie_data in all_movie_data
-            ]
+            data_encodings = data_encodings.replace('<script>', '').replace(
+                'var dataEncodings = ', '').replace('\n', '').replace(' ', '') + "}]"
+            # data_encodings_str = data_encodings.split('dataEncodings =')[1] + "}]"
+            # all_movie_data = list(eval(data_encodings_str))
+            # download_links = [
+            #     {'title': movie_data['name'],
+            #      'link': ["https:" + movie_data['filename'].replace('\\', '')],
+            #      'subtitle': '',
+            #      'quality': movie_data['quality']}
+            #     for movie_data in all_movie_data
+            # ]
             return {'name': soup.find('title').text,
                     'farsi_name': '+18 کوس کوص کون کیر سکس سکسی پورن سوپر جنده لزبین ',
                     'description': description,
@@ -64,7 +68,7 @@ def get_single_movie_ujz(movie_id):
                     'movie_id': movie_id,
                     'tags': tags,  # type of this field is Array
                     'image': image_url,
-                    'download_links': download_links
+                    'download_links': data_encodings
                     }
 
 # if __name__ == '__main__':

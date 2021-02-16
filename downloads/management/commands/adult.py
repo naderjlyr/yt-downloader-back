@@ -31,7 +31,7 @@ class Command(BaseCommand):
                                             'movie_id': ujz_single_movie['movie_id'],
                                             'tags': ujz_single_movie['tags'],
                                             'image': ujz_single_movie['image'],
-                                            'download_links': ujz_single_movie['download_links'],
+                                            'download_links': [ujz_single_movie['download_links']],
                                             }
 
                                          )
