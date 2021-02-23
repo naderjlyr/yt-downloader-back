@@ -13,7 +13,7 @@ class Command(BaseCommand):
         is_count = kwargs['count']
         # configs
         if stat_type == 'config':
-            configs = Configs.objects.all()
+            configs = Configs.objects.all().order_by('-created_at')[:50]
             if is_count:
                 print("count of all searches: ", configs.count())
             else:
