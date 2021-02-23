@@ -45,7 +45,7 @@ class SearchPost(viewsets.ViewSet):
                     models.Q(farsi_name__icontains=search_query) |
                     models.Q(tags__icontains=[search_query])
                 )
-            adult_data = adult_query.values()
+            adult_data = adult_query.values().order_by('-created_at')
             adults = {'type': 'adult', 'data': adult_data[:20]}
             all_search.append(adults)
         if 'educational' in filtering_type:
